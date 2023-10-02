@@ -13,7 +13,7 @@ export const Header = ({
   return (
     <header
       className={clsx(
-        'p-4 flex flex-wrap gap-8 justify-between bg-white border-b border-[#87450B]',
+        'p-4 flex gap-8 justify-between bg-white border-b border-[#87450B]',
         className,
       )}
     >

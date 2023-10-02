@@ -1,16 +1,17 @@
 import { Animal } from '@/data';
+import missing from '../assets/missing.svg';
 
 export const AnimalCard = ({ animal }: { animal: Animal }) => {
   return (
     <>
       <div className="relative">
         <img
-          className="rounded-t-lg border-b border-gray-600"
+          className="rounded-t-lg border-b border-gray-600 w-full"
           src={animal.image}
           alt={animal.ANIMALNAME}
           onError={(event) => {
             const target = event.target as HTMLImageElement;
-            target.src = 'https://placehold.co/300?text=No+Image';
+            target.src = missing;
           }}
         />
         {!animal.ADOPTABLE ? (

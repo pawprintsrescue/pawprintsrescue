@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { matchSorter } from 'match-sorter';
 import sortBy from 'sort-by';
 import { create } from 'zustand';
@@ -9,8 +5,11 @@ import { immer } from 'zustand/middleware/immer';
 import * as api from './animal.api';
 import { Animal } from './animal.model';
 
+export type AnimalType = 'kitten' | 'cat' | 'puppy' | 'dog';
+
 export interface AnimalState {
   animals: Animal[];
+  type?: AnimalType;
   selected?: Animal;
 }
 
@@ -20,8 +19,11 @@ export const useAnimalStore = create(
   })),
 );
 
-export const getAnimals = async (query?: string | null): Promise<Animal[]> => {
-  let { animals } = useAnimalStore.getState();
+export const getAnimals = async (
+  animalType?: AnimalType,
+  query?: string | null,
+): Promise<Animal[]> => {
+  let { animals, type } = useAnimalStore.getState();
 
   if (!animals?.length) {
     const adoptable = await api.getAnimals('json_adoptable_animals');
@@ -29,6 +31,22 @@ export const getAnimals = async (query?: string | null): Promise<Animal[]> => {
     animals = adoptable.concat(recentAdoptions);
     animals = animals.sort(sortBy('ANIMALNAME'));
     useAnimalStore.setState({ animals, selected: undefined }); // Clear selected animal
+  }
+
+  if (type !== animalType) useAnimalStore.setState({ selected: undefined }); // Clear selected animal
+
+  if (animalType) {
+    type = animalType;
+    animals = animals.filter((animal) => {
+      const dob = new Date(animal.DATEOFBIRTH);
+      const today = new Date();
+      // DOB is within the last year
+      const lastYear = today.getTime() - 365 * 24 * 60 * 60 * 1000;
+      return type === 'kitten' || type === 'puppy'
+        ? dob.getTime() > lastYear
+        : dob.getTime() <= lastYear;
+    });
+    useAnimalStore.setState({ type });
   }
 
   if (query) {
@@ -42,6 +60,7 @@ export const getAnimals = async (query?: string | null): Promise<Animal[]> => {
         'ANIMALCOMMENTS',
       ],
     });
+    useAnimalStore.setState({ selected: undefined }); // Clear selected animal
   }
 
   return animals;

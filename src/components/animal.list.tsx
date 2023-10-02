@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Animal } from '@/data';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
+import clsx from 'clsx';
 import debounce from 'lodash/debounce';
-import { RefObject, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Form, Link, useSubmit } from 'react-router-dom';
 import { AnimalCard } from './animal.card';
 
@@ -10,14 +11,17 @@ export const AnimalList = ({
   animals,
   selected,
   q,
-  searchRef,
+  pageTitle,
 }: {
   animals: Animal[];
   selected: Animal | null;
   q: string | null;
-  searchRef: RefObject<HTMLInputElement>;
+  pageTitle: string;
 }) => {
   const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const searchFormRef = useRef<HTMLFormElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
+  const [scrolled, setScrolled] = useState(false);
   const submit = useSubmit();
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +33,6 @@ export const AnimalList = ({
     submit(formData, { replace: !isFirstSearch });
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   const debounceSearchChange = debounce(handleSearchChange, 300);
 
   useEffect(() => {
@@ -47,15 +50,46 @@ export const AnimalList = ({
     }
   }, [animals, selected]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const form = searchFormRef.current;
+      const top = form?.getBoundingClientRect().top ?? 0;
+
+      setScrolled(top <= 80);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
-      <Form id="search-form" role="search">
-        <div className="flex justify-end">
+      <Form
+        ref={searchFormRef}
+        id="search-form"
+        role="search"
+        className={clsx(
+          'sticky top-20 z-20 py-4 transition-shadow',
+          scrolled
+            ? 'bg-[#ffcc66] border-y border-[#87450B] shadow-md shadow-black/20 p-4 md:px-6 lg:px-8 2xl:px-10 -mx-4 md:-mx-6 lg:-mx-8 2xl:-mx-10'
+            : '',
+        )}
+      >
+        <div className="flex items-center">
+          <h1
+            className={clsx(
+              'flex-1 text-4xl font-bold transition-opacity',
+              scrolled ? 'opacity-100' : 'opacity-0',
+            )}
+          >
+            {pageTitle}
+          </h1>
           <label htmlFor="search-field" className="sr-only">
             Search
           </label>
           <div className="relative rounded-md shadow-sm max-w-sm w-full">
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 h-9">
               <MagnifyingGlassIcon
                 className="h-5 w-5 text-gray-400"
                 aria-hidden="true"
@@ -82,7 +116,7 @@ export const AnimalList = ({
             <Link
               to={animal.ID.toString()}
               ref={(el) => (cardRefs.current[index] = el)}
-              className="block h-full transition-all hover:scale-105 shadow hover:shadow-lg rounded-lg bg-white focus-within:outline-none ring-1 ring-gray-600 focus:ring focus:ring-[#87450B]"
+              className="block h-full transition-all sm:hover:scale-105 shadow hover:shadow-lg rounded-lg bg-white focus-within:outline-none ring-1 ring-gray-600 focus:ring focus:ring-[#87450B]"
             >
               <AnimalCard animal={animal} />
             </Link>
