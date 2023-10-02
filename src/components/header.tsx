@@ -1,8 +1,15 @@
 import clsx from 'clsx';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import { Nav } from './nav';
 
-export const Header = ({ className }: { className?: string }) => {
+export const Header = ({
+  className,
+  scrolled,
+}: {
+  className?: string;
+  scrolled?: boolean;
+}) => {
   return (
     <header
       className={clsx(
@@ -10,103 +17,14 @@ export const Header = ({ className }: { className?: string }) => {
         className
       )}
     >
-      <Link to="/" className="block h-full">
+      <Link
+        to="/"
+        className={clsx('block transition-all', scrolled ? 'h-12' : 'h-32')}
+      >
         <img src={logo} alt="Paw Prints Animal Rescue" className="h-full" />
       </Link>
-      <nav className="pt-2.5">
-        <ul className="flex flex-wrap items-center gap-4 lg:text-lg font-bold whitespace-nowrap">
-          <li>
-            <NavLink
-              to="kittens"
-              className={({ isActive }) =>
-                clsx(
-                  'py-1 px-2 rounded-md',
-                  isActive
-                    ? 'text-white bg-[#87450B]'
-                    : 'hover:bg-[#87450B] hover:bg-opacity-50 hover:text-white'
-                )
-              }
-            >
-              Kittens
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="cats"
-              className={({ isActive }) =>
-                clsx(
-                  'py-1 px-2 rounded-md',
-                  isActive
-                    ? 'text-white bg-[#87450B]'
-                    : 'hover:bg-[#87450B] hover:bg-opacity-50 hover:text-white'
-                )
-              }
-            >
-              Cats
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                clsx(
-                  'py-1 px-2 rounded-md',
-                  isActive
-                    ? 'text-white bg-[#87450B]'
-                    : 'hover:bg-[#87450B] hover:bg-opacity-50 hover:text-white'
-                )
-              }
-            >
-              About Us
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                clsx(
-                  'py-1 px-2 rounded-md',
-                  isActive
-                    ? 'text-white bg-[#87450B]'
-                    : 'hover:bg-[#87450B] hover:bg-opacity-50 hover:text-white'
-                )
-              }
-            >
-              Wish List
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                clsx(
-                  'py-1 px-2 rounded-md',
-                  isActive
-                    ? 'text-white bg-[#87450B]'
-                    : 'hover:bg-[#87450B] hover:bg-opacity-50 hover:text-white'
-                )
-              }
-            >
-              Support Us
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                clsx(
-                  'py-1 px-2 rounded-md',
-                  isActive
-                    ? 'text-white bg-[#87450B]'
-                    : 'hover:bg-[#87450B] hover:bg-opacity-50 hover:text-white'
-                )
-              }
-            >
-              Contact Us
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
+
+      <Nav className="mt-2.5" />
     </header>
   );
 };

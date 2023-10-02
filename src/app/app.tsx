@@ -25,8 +25,9 @@ function App() {
       <Header
         className={clsx(
           'p-4 md:px-6 lg:px-8 2xl:px-10 fixed top-0 inset-x-0 z-20 transition-all',
-          scrolled ? 'h-20 shadow-md shadow-black/20' : 'h-40'
+          scrolled ? 'shadow-md shadow-black/20' : ''
         )}
+        scrolled={scrolled}
       />
 
       <main className="p-4 md:px-6 lg:px-8 2xl:px-10 mt-40">
@@ -49,7 +50,7 @@ function App() {
           className="fixed bottom-10 right-0 bg-[#87450B] rounded-lg rounded-r-none p-2 transition-all text-white hover:scale-150 hover:-translate-x-1/4 mb-4 inline-flex"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <ChevronUpIcon className="h-6 w-6" />
+          <ChevronUpIcon className="h-9 w-9" />
         </button>
       ) : null}
     </>
