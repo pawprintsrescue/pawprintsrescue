@@ -47,6 +47,36 @@ export const Nav = ({ className }: { className?: string }) => {
               )
             }
           >
+            Puppies
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              clsx(
+                'py-1 px-2 rounded-md',
+                isActive
+                  ? 'text-white bg-[#87450B]'
+                  : 'hover:bg-[#87450B] hover:bg-opacity-50 hover:text-white'
+              )
+            }
+          >
+            Dogs
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              clsx(
+                'py-1 px-2 rounded-md',
+                isActive
+                  ? 'text-white bg-[#87450B]'
+                  : 'hover:bg-[#87450B] hover:bg-opacity-50 hover:text-white'
+              )
+            }
+          >
             About Us
           </NavLink>
         </li>
