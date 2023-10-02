@@ -23,7 +23,8 @@
     "baseUrl": ".",
     "paths": {
       "@/components": ["src/components/index.ts"],
-      "@/data": ["src/data/index.ts"]
+      "@/data": ["src/data/index.ts"],
+      "@/lib": ["src/lib/index.ts"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],

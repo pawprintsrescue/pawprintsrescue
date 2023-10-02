@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Animal } from '@/data';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
@@ -72,14 +71,14 @@ export const AnimalList = ({
         className={clsx(
           'sticky top-20 z-20 py-4 transition-shadow',
           scrolled
-            ? 'bg-[#ffcc66] border-y border-[#87450B] shadow-md shadow-black/20 p-4 md:px-6 lg:px-8 2xl:px-10 -mx-4 md:-mx-6 lg:-mx-8 2xl:-mx-10'
+            ? 'bg-brown-100 border-y border-brown-900 shadow-md shadow-black/20 p-4 md:px-6 lg:px-8 2xl:px-10 -mx-4 md:-mx-6 lg:-mx-8 2xl:-mx-10'
             : '',
         )}
       >
         <div className="flex items-center">
           <h1
             className={clsx(
-              'flex-1 text-4xl font-bold transition-opacity',
+              'flex-1 text-4xl font-bold transition-opacity hidden sm:block',
               scrolled ? 'opacity-100' : 'opacity-0',
             )}
           >
@@ -88,7 +87,7 @@ export const AnimalList = ({
           <label htmlFor="search-field" className="sr-only">
             Search
           </label>
-          <div className="relative rounded-md shadow-sm max-w-sm w-full">
+          <div className="relative rounded-md shadow-sm sm:max-w-sm w-full">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 h-9">
               <MagnifyingGlassIcon
                 className="h-5 w-5 text-gray-400"
@@ -100,7 +99,7 @@ export const AnimalList = ({
               type="search"
               name="q"
               id="q"
-              className="block w-full rounded-md border-0 py-1.5 pl-10 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#87450B] sm:text-sm sm:leading-6 focus-within:outline-none"
+              className="block w-full rounded-md border-0 py-1.5 pl-10 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-brown-900 sm:text-sm sm:leading-6 focus-within:outline-none"
               placeholder="Search..."
               aria-label="Search for an animal"
               defaultValue={q ?? ''}
@@ -116,7 +115,7 @@ export const AnimalList = ({
             <Link
               to={animal.ID.toString()}
               ref={(el) => (cardRefs.current[index] = el)}
-              className="block h-full transition-all sm:hover:scale-105 shadow hover:shadow-lg rounded-lg bg-white focus-within:outline-none ring-1 ring-gray-600 focus:ring focus:ring-[#87450B]"
+              className="block h-full transition-all sm:hover:scale-105 shadow hover:shadow-lg rounded-lg bg-white focus-within:outline-none ring-1 ring-gray-600 focus:ring focus:ring-brown-900"
             >
               <AnimalCard animal={animal} />
             </Link>

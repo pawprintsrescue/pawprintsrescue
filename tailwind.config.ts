@@ -3,7 +3,22 @@ import type { Config } from 'tailwindcss';
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        brown: {
+          50: '#ffcc66',
+          100: '#f0bc5b',
+          200: '#e1ab50',
+          300: '#c38939',
+          400: '#b4782e',
+          500: '#a56722',
+          600: '#9a5b1a',
+          700: '#8f4e11',
+          800: '#8b4a0e',
+          900: '#87450b',
+        },
+      },
+    },
   },
   plugins: [],
 } satisfies Config;

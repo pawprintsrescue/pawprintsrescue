@@ -6,7 +6,7 @@ export const AnimalDetail = ({ animal }: { animal: Animal }) => {
     <div className="flex flex-wrap gap-8">
       <div className="relative">
         <img
-          className="rounded-lg border border-gray-600 max-w-5xl w-full"
+          className="rounded-lg border border-brown-600 max-w-xl w-full"
           src={animal.image}
           alt={animal.ANIMALNAME}
           onError={(event) => {

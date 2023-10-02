@@ -6,7 +6,7 @@ export const AnimalCard = ({ animal }: { animal: Animal }) => {
     <>
       <div className="relative">
         <img
-          className="rounded-t-lg border-b border-gray-600 w-full"
+          className="rounded-t-lg border-b border-brown-600 w-full"
           src={animal.image}
           alt={animal.ANIMALNAME}
           onError={(event) => {

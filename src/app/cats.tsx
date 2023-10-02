@@ -1,7 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { Animal } from '@/data';
-import { useEffect } from 'react';
-import { useLoaderData, useLocation } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import { AnimalList } from '../components/animal.list';
 import { getAnimals, getSelectedAnimal } from '../data/animal.store';
 
@@ -15,23 +14,12 @@ export async function loader({ request }: { request: Request }) {
 }
 
 export const CatsPage = () => {
-  const { hash } = useLocation();
   const { animals, selected, q } = useLoaderData() as {
     animals: Animal[];
     selected: Animal | null;
     q: string | null;
   };
   const pageTitle = 'Cats';
-
-  useEffect(() => {
-    const fragment = hash.substring(1);
-    if (fragment) {
-      const element = document.getElementById(fragment);
-      if (element) {
-        element.scrollIntoView();
-      }
-    }
-  }, [hash]);
 
   return (
     <div>

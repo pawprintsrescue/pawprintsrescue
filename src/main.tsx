@@ -35,6 +35,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  { path: '*', element: <Navigate to="/" /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

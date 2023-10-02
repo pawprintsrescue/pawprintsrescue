@@ -7,27 +7,34 @@ const navigation = [
   { name: 'Puppies', href: 'puppies' },
   { name: 'Dogs', href: 'dogs' },
   { name: 'About Us', href: 'about' },
-  // { name: 'Wish List', href: 'wish-list' },
-  // { name: 'Support Us', href: 'support' },
+  { name: 'Wish List', href: 'wish-list' },
+  { name: 'Support Us', href: 'support' },
   { name: 'Contact Us', href: 'contact' },
 ];
 
-export const Nav = ({ className }: { className?: string }) => {
+export const MobileNav = ({
+  className,
+  onItemClick,
+}: {
+  className?: string;
+  onItemClick: () => void;
+}) => {
   return (
     <nav className={className}>
-      <ul className="flex items-center gap-4 lg:text-lg font-bold whitespace-nowrap">
+      <ul className="flex flex-col gap-4 lg:text-lg font-bold whitespace-nowrap">
         {navigation.map((item) => (
           <li key={item.name}>
             <NavLink
               to={item.href}
               className={({ isActive }) =>
                 clsx(
-                  'py-1 px-2 rounded-md',
+                  'py-1 px-2 rounded-md block',
                   isActive
                     ? 'text-white bg-brown-900'
                     : 'hover:bg-brown-300 hover:text-white',
                 )
               }
+              onClick={onItemClick}
             >
               {item.name}
             </NavLink>

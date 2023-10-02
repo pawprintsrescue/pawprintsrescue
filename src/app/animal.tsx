@@ -18,7 +18,7 @@ export const AnimalPage = () => {
     <div>
       <Link
         to=".."
-        className="bg-[#87450B] rounded-lg py-1 px-2 text-white bg-opacity-75 hover:bg-opacity-100 mb-4 inline-flex"
+        className="bg-brown-600 rounded-lg py-1 px-2 text-white hover:bg-brown-800 active:bg-brown-900 focus:bg-brown-800 mb-4 inline-flex"
       >
         Back to list
       </Link>

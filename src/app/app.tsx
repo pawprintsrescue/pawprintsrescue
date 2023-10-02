@@ -47,7 +47,7 @@ function App() {
       {scrolled ? (
         <button
           type="button"
-          className="fixed bottom-10 right-0 bg-[#87450B] rounded-lg rounded-r-none p-2 transition-all text-white hover:scale-150 hover:-translate-x-1/4 mb-4 inline-flex"
+          className="fixed bottom-10 right-0 bg-brown-900 rounded-lg rounded-r-none p-2 transition-all text-white hover:scale-150 hover:-translate-x-1/4 mb-4 inline-flex"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <ChevronUpIcon className="h-9 w-9" />
