@@ -53,14 +53,15 @@ export const AnimalList = ({
     const handleScroll = () => {
       const form = searchFormRef.current;
       const top = form?.getBoundingClientRect().top ?? 0;
+      const pastTop = top <= 80;
 
-      setScrolled(top <= 80);
+      if (pastTop !== scrolled) setScrolled(pastTop);
     };
 
     window.addEventListener('scroll', handleScroll);
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [scrolled]);
 
   return (
     <>
