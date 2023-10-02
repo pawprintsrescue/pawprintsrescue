@@ -17,7 +17,7 @@ export interface AnimalState {
 export const useAnimalStore = create(
   immer<AnimalState>(() => ({
     animals: [],
-  }))
+  })),
 );
 
 export const getAnimals = async (query?: string | null): Promise<Animal[]> => {

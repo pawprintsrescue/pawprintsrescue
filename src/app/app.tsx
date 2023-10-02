@@ -25,7 +25,7 @@ function App() {
       <Header
         className={clsx(
           'p-4 md:px-6 lg:px-8 2xl:px-10 fixed top-0 inset-x-0 z-20 transition-all',
-          scrolled ? 'shadow-md shadow-black/20' : ''
+          scrolled ? 'shadow-md shadow-black/20' : '',
         )}
         scrolled={scrolled}
       />

@@ -14,7 +14,7 @@ export const Header = ({
     <header
       className={clsx(
         'p-4 flex flex-wrap gap-8 justify-between bg-white border-b border-[#87450B]',
-        className
+        className,
       )}
     >
       <Link

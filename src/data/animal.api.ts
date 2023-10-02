@@ -10,7 +10,7 @@ export async function getAnimalImage(id: number) {
   const image = await fetch(
     `${import.meta.env.VITE_ASM_SERVICEURL}?method=${method}&account=${
       import.meta.env.VITE_ASM_ACCOUNT
-    }&animalid=${id}&seq=1`
+    }&animalid=${id}&seq=1`,
   )
     .then((response) => response.arrayBuffer())
     .then((arrayBuffer) => {
@@ -28,15 +28,15 @@ export async function getAnimals(method = 'json_shelter_animals') {
         import.meta.env.VITE_ASM_ACCOUNT
       }&username=${import.meta.env.VITE_ASM_USERNAME}&password=${
         import.meta.env.VITE_ASM_PASSWORD
-      }`
+      }`,
     )
       .then((response) => response.json() as Promise<Animal[]>)
       .then((animals) =>
         animals.map(async (animal) => ({
           ...animal,
           image: await getAnimalImage(animal.ID),
-        }))
-      )
+        })),
+      ),
   );
 
   if (!animals) animals = [];
