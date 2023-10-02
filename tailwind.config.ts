@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import safeAreaPlugin from 'tailwindcss-safe-area';
 
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
@@ -20,5 +21,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [safeAreaPlugin],
 } satisfies Config;

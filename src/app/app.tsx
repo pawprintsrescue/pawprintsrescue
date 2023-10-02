@@ -24,17 +24,17 @@ function App() {
 
       <Header
         className={clsx(
-          'p-4 md:px-6 lg:px-8 2xl:px-10 fixed top-0 inset-x-0 z-20 transition-all',
+          'pt-safe-offset-4 pb-4 px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10 fixed top-0 inset-x-0 z-20 transition-all',
           scrolled ? 'shadow-md shadow-black/20' : '',
         )}
         scrolled={scrolled}
       />
 
-      <main className="p-4 md:px-6 lg:px-8 2xl:px-10 mt-40">
+      <main className="py-4 px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10 mt-40">
         <Outlet />
       </main>
 
-      <footer className="p-4 md:px-6 lg:px-8 2xl:px-10 text-sm text-center">
+      <footer className="pb-safe-offset-8 pt-8 px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10 text-sm text-center">
         <p>Copyright &copy; 2023 Paw Prints Animal Rescue, Inc.</p>
         <p>P.O. Box 1472, Garner, NC 27529</p>
         <p>
