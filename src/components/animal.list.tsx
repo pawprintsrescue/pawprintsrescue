@@ -20,6 +20,7 @@ export const AnimalList = ({
   const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const searchFormRef = useRef<HTMLFormElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
+  const [initial, setInitial] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const submit = useSubmit();
 
@@ -50,18 +51,25 @@ export const AnimalList = ({
   }, [animals, selected]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const form = searchFormRef.current;
-      const top = form?.getBoundingClientRect().top ?? 0;
-      const pastTop = top <= 80;
+    const initial = searchFormRef.current?.offsetTop ?? null;
 
-      if (pastTop !== scrolled) setScrolled(pastTop);
+    setInitial(initial);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (initial === null) return;
+
+      const form = searchFormRef.current;
+      const top = form?.offsetTop ?? 0;
+
+      setScrolled(top > initial);
     };
 
     window.addEventListener('scroll', handleScroll);
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [scrolled]);
+  }, [initial, scrolled]);
 
   return (
     <>
@@ -72,7 +80,10 @@ export const AnimalList = ({
         className={clsx(
           'sticky top-20 z-20 py-4 transition-shadow',
           scrolled
-            ? 'bg-brown-100 border-y border-brown-900 shadow-md shadow-black/20 p-4 md:px-6 lg:px-8 2xl:px-10 -mx-4 md:-mx-6 lg:-mx-8 2xl:-mx-10'
+            ? 'bg-brown-100 border-y border-brown-900 shadow-md shadow-black/20 py-4 px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10'
+            : '',
+          scrolled
+            ? 'ml-[calc(env(safe-area-inset-left)*-1-1rem)] mr-[calc(env(safe-area-inset-right)*-1-1rem)] md:ml-[calc(env(safe-area-inset-left)*-1-1.5rem)] md:mr-[calc(env(safe-area-inset-right)*-1-1.5rem)] lg:ml-[calc(env(safe-area-inset-left)*-1-2rem)] lg:mr-[calc(env(safe-area-inset-right)*-1-2rem)] 2xl:ml-[calc(env(safe-area-inset-left)*-1-2.5rem)] 2xl:mr-[calc(env(safe-area-inset-right)*-1-2.5rem)]'
             : '',
         )}
       >
