@@ -321,3 +321,7 @@ export interface AsmAnimal {
 export type Animal = AsmAnimal & {
   image: string;
 };
+
+export type AsmRecentlyAdopted = AsmAnimal & {
+  ANIMALID: number;
+};
