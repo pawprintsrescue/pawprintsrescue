@@ -4,7 +4,7 @@ import missing from '../assets/missing.svg';
 export const AnimalCard = ({ animal }: { animal: Animal }) => {
   return (
     <>
-      <div className="relative">
+      <div className="relative overflow-hidden">
         <img
           className="rounded-t-lg border-b border-brown-600 w-full"
           src={animal.image}

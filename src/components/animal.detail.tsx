@@ -4,7 +4,7 @@ import missing from '../assets/missing.svg';
 export const AnimalDetail = ({ animal }: { animal: Animal }) => {
   return (
     <div className="flex flex-wrap gap-8">
-      <div className="relative">
+      <div className="relative overflow-hidden">
         <img
           className="rounded-lg border border-brown-600 max-w-xl w-full"
           src={animal.image}
