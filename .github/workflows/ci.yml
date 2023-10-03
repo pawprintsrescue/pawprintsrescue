@@ -16,7 +16,7 @@ jobs:
       - name: Build
         run: |
           npm install
-          npm run build
+          npm run build -- --base /pawprintsrescue/
         env:
           VITE_ASM_SERVICEURL: ${{ secrets.VITE_ASM_SERVICEURL }}
           VITE_ASM_ACCOUNT: ${{ secrets.VITE_ASM_ACCOUNT }}
