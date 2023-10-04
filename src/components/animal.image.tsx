@@ -10,12 +10,7 @@ export const AnimalImage = ({
   className?: string;
 }) => {
   return (
-    <div
-      className={clsx(
-        'relative overflow-hidden min-h-[180px] bg-brown-100',
-        className,
-      )}
-    >
+    <div className={clsx('relative overflow-hidden bg-brown-100', className)}>
       <img
         className="w-full"
         src={animal.image}

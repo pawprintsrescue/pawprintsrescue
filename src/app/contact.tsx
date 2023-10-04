@@ -40,9 +40,9 @@ export const ContactPage = () => {
                       (919) 772-9107
                     </a>
                   </p>
-                  <p>General: Option 1</p>
-                  <p>Dogs/Puppies: Option 2</p>
-                  <p>Cats/Kittens: Option 3</p>
+                  <p>Option 1: General Message</p>
+                  <p>Option 2: Cats & Kittens</p>
+                  <p>Option 3: Dogs & Puppies</p>
                 </dd>
               </div>
             </dl>
