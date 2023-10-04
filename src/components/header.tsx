@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import { MobileNav } from './mobile-nav';
 import { Nav } from './nav';
 
 export const Header = ({
@@ -19,7 +18,7 @@ export const Header = ({
   return (
     <header
       className={clsx(
-        'p-4 flex gap-8 justify-between bg-white border-b border-brown-900',
+        'flex gap-8 justify-between bg-white border-b border-brown-900',
         className,
       )}
     >
@@ -51,15 +50,19 @@ export const Header = ({
         onClose={setMobileMenuOpen}
       >
         <div className="fixed inset-0 z-30" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-30 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-brown-900/10">
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-30 w-full overflow-y-auto bg-white pt-safe-offset-4 pb-4 px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10 sm:max-w-sm sm:ring-1 sm:ring-brown-900/10">
           <div className="flex items-start justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link
+              to="/"
+              className="h-12"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               <span className="sr-only">Paw Prints Animal Rescue</span>
-              <img src={logo} alt="" className="h-12" />
-            </a>
+              <img src={logo} alt="" className="h-auto max-h-full" />
+            </Link>
             <button
               type="button"
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              className="-mx-2.5 rounded-md p-2.5 text-gray-700"
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">Close menu</span>
@@ -67,7 +70,10 @@ export const Header = ({
             </button>
           </div>
           <div className="mt-6 flow-root">
-            <MobileNav onItemClick={() => setMobileMenuOpen(false)} />
+            <Nav
+              className="[&>ul]:flex-col"
+              onItemClick={() => setMobileMenuOpen(false)}
+            />
           </div>
         </Dialog.Panel>
       </Dialog>

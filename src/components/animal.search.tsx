@@ -78,6 +78,7 @@ export const AnimalSearch = ({
         >
           {pageTitle}
         </h1>
+
         <label htmlFor="search-field" className="sr-only">
           Search
         </label>

@@ -7,12 +7,12 @@ import { AnimalSearch } from './animal.search';
 export const AnimalList = ({
   animals,
   selected,
-  q,
+  query,
   pageTitle,
 }: {
   animals: Animal[];
   selected: Animal | null;
-  q: string | null;
+  query: string | null;
   pageTitle: string;
 }) => {
   const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -33,7 +33,7 @@ export const AnimalList = ({
 
   return (
     <>
-      <AnimalSearch query={q} pageTitle={pageTitle} />
+      <AnimalSearch query={query} pageTitle={pageTitle} />
 
       <ul className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-x-6">
         {animals.map((animal: Animal, index: number) => (

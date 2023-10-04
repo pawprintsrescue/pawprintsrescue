@@ -10,9 +10,14 @@ export const AnimalImage = ({
   className?: string;
 }) => {
   return (
-    <div className={clsx('relative overflow-hidden', className)}>
+    <div
+      className={clsx(
+        'relative overflow-hidden min-h-[180px] bg-brown-100',
+        className,
+      )}
+    >
       <img
-        className="max-w-xl w-full"
+        className="w-full"
         src={animal.image}
         alt={animal.ANIMALNAME}
         onError={(event) => {
@@ -21,7 +26,7 @@ export const AnimalImage = ({
         }}
       />
       {!animal.ADOPTABLE ? (
-        <div className="ring-8 ring-white absolute -mt-6 top-1/2 text-5xl w-full -rotate-12 shadow-md shadow-black/20">
+        <div className="border-8 border-white absolute -mt-6 top-1/2 text-5xl w-full -rotate-12 shadow-md shadow-black/20">
           <div className="uppercase font-bold text-center drop-shadow-md text-white">
             Adopted
           </div>

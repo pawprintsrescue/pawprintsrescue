@@ -35,7 +35,10 @@ function App() {
       </main>
 
       <footer className="pb-safe-offset-8 pt-8 px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10 text-sm text-center">
-        <p>Copyright &copy; 2023 Paw Prints Animal Rescue, Inc.</p>
+        <p>
+          Copyright &copy; {new Date().getFullYear()} Paw Prints Animal Rescue,
+          Inc.
+        </p>
         <p>P.O. Box 1472, Garner, NC 27529</p>
         <p>
           <a href="tel:9197729107" className="hover:underline">

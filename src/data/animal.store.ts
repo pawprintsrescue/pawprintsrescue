@@ -63,6 +63,9 @@ export const getAnimals = async (
     useAnimalStore.setState({ selected: undefined }); // Clear selected animal
   }
 
+  // Simulate network delay to provide a better UX
+  // await new Promise((resolve) => setTimeout(resolve, 400));
+
   return animals;
 };
 

@@ -1,29 +1,39 @@
 /* eslint-disable react-refresh/only-export-components */
 import { Animal } from '@/data';
-import { useLoaderData } from 'react-router-dom';
+import { Suspense } from 'react';
+import { Await, defer, useLoaderData } from 'react-router-dom';
 import { AnimalList } from '../components/animal.list';
+import { AnimalListSkeleton } from '../components/animal.list.skeleton';
 import { getAnimals, getSelectedAnimal } from '../data/animal.store';
 
-export async function loader({ request }: { request: Request }) {
+export function loader({ request }: { request: Request }) {
   const url = new URL(request.url);
-  const q = url.searchParams.get('q');
-  const animals = await getAnimals('kitten', q);
+  const query = url.searchParams.get('q');
+  const showSkeleton = url.searchParams.get('skeleton') === 'true';
+  const animals = showSkeleton
+    ? Promise.race<Animal[]>([])
+    : getAnimals('kitten', query);
   const selected = getSelectedAnimal();
 
-  return { animals, selected, q };
+  return defer({
+    animals,
+    selected,
+    query,
+  });
 }
 
 export const KittensPage = () => {
-  const { animals, selected, q } = useLoaderData() as {
-    animals: Animal[];
+  const { animals, selected, query } = useLoaderData() as {
+    animals: Promise<Animal[]>;
     selected: Animal | null;
-    q: string | null;
+    query: string | null;
   };
   const pageTitle = 'Kittens';
 
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-2">{pageTitle}</h1>
+      <h1 className="text-4xl font-bold mb-4">{pageTitle}</h1>
+
       <p className="text-sm text-gray-900 font-bold">
         All Paw Prints kittens are:
       </p>
@@ -41,12 +51,19 @@ export const KittensPage = () => {
         Unless otherwise noted, our adoption fee for kittens is $125 or $215 for
         two kittens.
       </p>
-      <AnimalList
-        animals={animals}
-        selected={selected}
-        q={q}
-        pageTitle={pageTitle}
-      />
+
+      <Suspense fallback={<AnimalListSkeleton />}>
+        <Await resolve={animals}>
+          {(resolvedAnimals: Animal[]) => (
+            <AnimalList
+              animals={resolvedAnimals}
+              selected={selected}
+              query={query}
+              pageTitle={pageTitle}
+            />
+          )}
+        </Await>
+      </Suspense>
     </div>
   );
 };

@@ -6,7 +6,7 @@ export const AnimalCard = ({ animal }: { animal: Animal }) => {
     <>
       <AnimalImage
         animal={animal}
-        className="[&>img]:rounded-t-lg [&>img]:border-b [&>img]:border-gray-600"
+        className="[&>img]:rounded-t-lg rounded-t-lg border-b border-gray-600"
       />
 
       <div className="p-4">
