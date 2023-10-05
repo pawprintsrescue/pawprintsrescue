@@ -12,7 +12,7 @@ export function loader({ request }: { request: Request }) {
   const showSkeleton = url.searchParams.get('skeleton') === 'true';
   const animals = showSkeleton
     ? Promise.race<Animal[]>([])
-    : getAnimals('cat', query);
+    : getAnimals(query, 'Cat');
   const selected = getSelectedAnimal();
 
   return defer({
@@ -32,12 +32,10 @@ export const CatsPage = () => {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-4">{pageTitle}</h1>
+      <h1 className="text-4xl font-bold mb-4 text-brown-900">{pageTitle}</h1>
 
-      <p className="text-sm text-gray-900 font-bold">
-        All Paw Prints cats are:
-      </p>
-      <ol className="list-decimal list-inside text-sm mb-2 text-gray-900">
+      <p className="text-sm font-bold">All Paw Prints cats are:</p>
+      <ol className="list-decimal pl-4 text-sm mb-2">
         <li>
           Tested for the feline leukemia (FeLV) and the feline immunodeficiency
           (FIV) viruses (and negative unless otherwise noted)
@@ -46,7 +44,7 @@ export const CatsPage = () => {
         <li>Sterilized</li>
         <li>Microchipped</li>
       </ol>
-      <p className="text-sm mb-2 text-gray-900 font-bold">
+      <p className="text-sm mb-2 font-bold">
         Unless otherwise noted, our adoption fee for adult cats is $100 or $175
         for two adult cats.
       </p>

@@ -5,7 +5,8 @@ import { immer } from 'zustand/middleware/immer';
 import * as api from './animal.api';
 import { Animal } from './animal.model';
 
-export type AnimalType = 'kitten' | 'cat' | 'puppy' | 'dog';
+export type Species = 'Cat' | 'Dog';
+export type AnimalType = 'Kitten' | 'Cat' | 'Puppy' | 'Dog';
 
 export interface AnimalState {
   animals: Animal[];
@@ -20,8 +21,8 @@ export const useAnimalStore = create(
 );
 
 export const getAnimals = async (
-  animalType?: AnimalType,
   query?: string | null,
+  animalType?: AnimalType,
 ): Promise<Animal[]> => {
   let { animals, type } = useAnimalStore.getState();
 
@@ -37,12 +38,15 @@ export const getAnimals = async (
 
   if (animalType) {
     type = animalType;
+    const species: Species =
+      animalType === 'Cat' || animalType === 'Kitten' ? 'Cat' : 'Dog';
+    animals = animals.filter((animal) => animal.SPECIESNAME === species);
     animals = animals.filter((animal) => {
       const dob = new Date(animal.DATEOFBIRTH);
       const today = new Date();
       // DOB is within the last year
       const lastYear = today.getTime() - 365 * 24 * 60 * 60 * 1000;
-      return type === 'kitten' || type === 'puppy'
+      return type === 'Kitten' || type === 'Puppy'
         ? dob.getTime() > lastYear
         : dob.getTime() <= lastYear;
     });

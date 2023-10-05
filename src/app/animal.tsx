@@ -22,11 +22,13 @@ export const AnimalPage = () => {
         Back to list
       </Link>
 
-      <h1 className="text-4xl font-bold mb-4">Meet {animal.ANIMALNAME}</h1>
+      <h1 className="text-4xl font-bold mb-4 text-brown-900">
+        Meet {animal.ANIMALNAME}
+      </h1>
 
       <div className="flex flex-wrap gap-8">
         <div className="flex-1">
-          <div className="text-gray-900">
+          <div>
             <p>
               <b>Born:</b>{' '}
               {Intl.DateTimeFormat().format(new Date(animal.DATEOFBIRTH))}
@@ -45,7 +47,7 @@ export const AnimalPage = () => {
             </p>
             <p className="font-bold">{animal.BASECOLOURNAME}</p>
           </div>
-          <p className="mt-1 text-gray-900 text-lg">{animal.ANIMALCOMMENTS}</p>
+          <p className="mt-1 text-lg">{animal.ANIMALCOMMENTS}</p>
         </div>
 
         <div className="flex-1">

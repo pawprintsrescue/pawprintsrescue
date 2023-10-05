@@ -5,13 +5,13 @@ import youtubeIcon from '../assets/youtube-icon.png';
 export const HomePage = () => {
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-4">
+      <h1 className="text-4xl font-bold mb-4 text-brown-900">
         Welcome to Paw Prints Animal Rescue
       </h1>
 
       <div className="grid grid-cols-12 gap-8">
         <div className="space-y-2 col-span-12 lg:col-span-6">
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-2xl font-bold text-brown-900">
             Come see our adorable, adoptable cats and kittens
           </h2>
           <p>
@@ -83,7 +83,7 @@ export const HomePage = () => {
           makes a lifetime commitment to every animal we rescue. We never want
           these animals to be homeless again.
         </p>
-        <p className="flex items-center justify-center h-32 lg:h-60 2xl:h-auto bg-white/25 py-2 px-4 rounded-2xl col-span-12 lg:col-span-6 lg:row-span-2 2xl:row-span-1">
+        <div className="flex items-center justify-center h-32 lg:h-56 2xl:h-auto bg-white/25 py-2 px-4 rounded-2xl col-span-12 lg:col-span-6 lg:row-span-2 2xl:row-span-1">
           <input
             type="image"
             src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif"
@@ -96,12 +96,15 @@ export const HomePage = () => {
             width="1"
             height="1"
           />
-        </p>
+        </div>
         <p className="text-xs col-span-12 lg:col-span-6">
           Financial information about this organization and a copy of its
           license are available from the North Carolina State Solicitation
-          Licensing Branch at (919) 807-2214. The license is not an endorsement
-          by the State.
+          Licensing Branch at{' '}
+          <a href="tel:9198072214" className="font-semibold hover:underline">
+            (919) 807-2214
+          </a>
+          . The license is not an endorsement by the State.
         </p>
       </div>
     </div>

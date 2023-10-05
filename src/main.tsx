@@ -7,12 +7,17 @@ import {
 } from 'react-router-dom';
 import { AboutPage } from './app/about';
 import { AnimalPage, loader as animalLoader } from './app/animal';
-import App from './app/app';
+import App, { loader as appLoader } from './app/app';
 import { CatsPage, loader as catsLoader } from './app/cats';
 import { ContactPage } from './app/contact';
+import { DogsPage, loader as dogsLoader } from './app/dogs';
 import ErrorPage from './app/error';
+import { FeralPage } from './app/feral';
 import { HomePage } from './app/home';
 import { KittensPage, loader as kittensLoader } from './app/kittens';
+import { PuppiesPage, loader as puppiesLoader } from './app/puppies';
+import { SupportPage } from './app/support';
+import { WishListPage } from './app/wish-list';
 import './styles.css';
 
 const router = createBrowserRouter(
@@ -20,9 +25,17 @@ const router = createBrowserRouter(
     {
       path: '/',
       element: <App />,
+      loader: appLoader,
       errorElement: <ErrorPage />,
       children: [
         { index: true, element: <HomePage /> },
+        {
+          path: 'animals',
+          children: [
+            { index: true, element: <Navigate to="/" /> },
+            { path: ':id', element: <AnimalPage />, loader: animalLoader },
+          ],
+        },
         {
           path: 'kittens',
           children: [
@@ -37,7 +50,24 @@ const router = createBrowserRouter(
             { path: ':id', element: <AnimalPage />, loader: animalLoader },
           ],
         },
+        {
+          path: 'puppies',
+          children: [
+            { index: true, element: <PuppiesPage />, loader: puppiesLoader },
+            { path: ':id', element: <AnimalPage />, loader: animalLoader },
+          ],
+        },
+        {
+          path: 'dogs',
+          children: [
+            { index: true, element: <DogsPage />, loader: dogsLoader },
+            { path: ':id', element: <AnimalPage />, loader: animalLoader },
+          ],
+        },
+        { path: 'feral', element: <FeralPage /> },
         { path: 'about', element: <AboutPage /> },
+        { path: 'wish-list', element: <WishListPage /> },
+        { path: 'support', element: <SupportPage /> },
         { path: 'contact', element: <ContactPage /> },
       ],
     },

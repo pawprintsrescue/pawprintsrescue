@@ -1,8 +1,6 @@
 import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import MobileDetect from 'mobile-detect';
 import { Fragment } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
@@ -30,7 +28,7 @@ const navigation: NavigationItem[] = [
   { name: 'Contact Us', href: '/contact' },
 ];
 
-export const Nav = ({
+export const NavMobile = ({
   className,
   onItemClick,
 }: {
@@ -38,7 +36,6 @@ export const Nav = ({
   onItemClick?: () => void;
 }) => {
   const { pathname } = useLocation();
-  const deviceType = new MobileDetect(window.navigator.userAgent);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   const isActive = (item: NavigationItem): boolean => {
@@ -48,19 +45,9 @@ export const Nav = ({
       : item.children?.some(isActive) ?? false;
   };
 
-  const handleSearchClick = () => {
-    const mac = deviceType.os() === 'MacOS';
-    const e = new KeyboardEvent('keydown', {
-      key: 'k',
-      ctrlKey: !mac,
-      metaKey: mac,
-    });
-    document.dispatchEvent(e);
-  };
-
   return (
     <nav className={className}>
-      <ul className="flex gap-4 font-bold whitespace-nowrap">
+      <ul className="flex flex-col gap-4 font-bold whitespace-nowrap">
         {navigation.map((item) => (
           <li key={item.name}>
             {item.href ? (
@@ -82,7 +69,7 @@ export const Nav = ({
               <Popover className="relative">
                 <Popover.Button
                   className={clsx(
-                    'py-1 px-2 rounded-md flex items-center',
+                    'py-1 px-2 rounded-md flex items-center justify-between w-full',
                     isActive(item)
                       ? 'text-white bg-brown-900'
                       : 'hover:bg-brown-300 hover:text-white',
@@ -101,19 +88,19 @@ export const Nav = ({
                   leaveFrom="opacity-100 translate-y-0"
                   leaveTo="opacity-0 translate-y-1"
                 >
-                  <Popover.Panel className="absolute left-1/2 z-30 mt-3 flex w-screen max-w-max -translate-x-1/2 px-4">
+                  <Popover.Panel className="absolute z-50 mt-3 flex max-w-sm w-full">
                     <div className="max-w-lg flex-auto overflow-hidden rounded-xl text-sm leading-6 shadow-lg ring-1 ring-gray-900/5 bg-white">
-                      <div className="px-4 py-2 flex gap-8">
+                      <div className="px-4 py-2 flex flex-col gap-4">
                         {item.children?.map((item) => (
                           <Popover.Button
                             as={NavLink}
                             key={item.name}
                             to={item.href!}
                             className={clsx(
-                              'py-0.5 px-2 block border-b-2',
+                              'py-0.5 px-2 block rounded-md',
                               isActive(item)
-                                ? 'border-brown-900'
-                                : 'border-transparent hover:border-brown-300',
+                                ? 'text-white bg-brown-900'
+                                : 'hover:bg-brown-300 hover:text-white',
                             )}
                             onClick={onItemClick}
                           >
@@ -128,16 +115,6 @@ export const Nav = ({
             )}
           </li>
         ))}
-        <li>
-          <button
-            type="button"
-            className="h-8 w-8 rounded-md flex items-center justify-center"
-            onClick={handleSearchClick}
-          >
-            <span className="sr-only">Search animals</span>
-            <MagnifyingGlassIcon className="h-6 w-6" />
-          </button>
-        </li>
       </ul>
     </nav>
   );

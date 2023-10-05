@@ -11,7 +11,11 @@ export const AnimalSearch = ({
   query: string | null;
   pageTitle: string;
 }) => {
+  const searchRef = useRef<HTMLInputElement>(null);
   const submit = useSubmit();
+  const searchFormRef = useRef<HTMLFormElement>(null);
+  const [initialSearchTop, setInitialSearchTop] = useState<number | null>(null);
+  const [scrolled, setScrolled] = useState(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isFirstSearch = query === null;
@@ -23,11 +27,6 @@ export const AnimalSearch = ({
   };
 
   const debounceSearchChange = debounce(handleSearchChange, 300);
-
-  const searchFormRef = useRef<HTMLFormElement>(null);
-  const searchRef = useRef<HTMLInputElement>(null);
-  const [initialSearchTop, setInitialSearchTop] = useState<number | null>(null);
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     if (searchRef.current) searchRef.current.value = query ?? '';
@@ -72,7 +71,7 @@ export const AnimalSearch = ({
       <div className="flex items-center">
         <h1
           className={clsx(
-            'flex-1 text-4xl font-bold transition-opacity hidden sm:block',
+            'flex-1 text-4xl font-bold transition-opacity hidden sm:block text-brown-900',
             scrolled ? 'opacity-100' : 'opacity-0',
           )}
         >
@@ -94,7 +93,7 @@ export const AnimalSearch = ({
             type="search"
             name="q"
             id="q"
-            className="block w-full rounded-md border-0 py-1.5 pl-10 pr-1.5 text-gray-900 ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-brown-900 sm:text-sm sm:leading-6 focus-within:outline-none"
+            className="block w-full rounded-md border-0 py-1.5 pl-10 pr-1.5 ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-brown-900 sm:text-sm sm:leading-6 focus-within:outline-none"
             placeholder="Search..."
             aria-label="Search for an animal"
             defaultValue={query ?? ''}

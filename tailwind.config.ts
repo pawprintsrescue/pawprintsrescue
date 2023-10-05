@@ -1,3 +1,4 @@
+import formsPlugin from '@tailwindcss/forms';
 import type { Config } from 'tailwindcss';
 import safeAreaPlugin from 'tailwindcss-safe-area';
 
@@ -21,5 +22,5 @@ export default {
       },
     },
   },
-  plugins: [safeAreaPlugin],
+  plugins: [safeAreaPlugin, formsPlugin],
 } satisfies Config;

@@ -1,11 +1,11 @@
 export const ContactPage = () => {
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-4">Get in touch</h1>
+      <h1 className="text-4xl font-bold mb-4 text-brown-900">Get in touch</h1>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         <div>
-          <p className="text-gray-900">
+          <p>
             Please note that we are an all-volunteer organization. It is our
             goal to respond to messages received from the public as timely as
             possible.
@@ -17,7 +17,7 @@ export const ContactPage = () => {
             <h3 className="text-base font-semibold leading-7 text-brown-900">
               Mailing Address
             </h3>
-            <address className="mt-3 text-sm not-italic leading-6 text-gray-900">
+            <address className="mt-3 text-sm not-italic leading-6">
               <p>Paw Prints Animal Rescue</p>
               <p>P.O. Box 1472</p>
               <p>Garner, NC 27529</p>
@@ -28,7 +28,7 @@ export const ContactPage = () => {
             <h3 className="text-base font-semibold leading-7 text-brown-900">
               Telephone
             </h3>
-            <dl className="mt-3 text-sm leading-6 text-gray-900">
+            <dl className="mt-3 text-sm leading-6">
               <div className="mt-1">
                 <dt className="sr-only">Phone number</dt>
                 <dd>
@@ -52,7 +52,7 @@ export const ContactPage = () => {
             <h3 className="text-base font-semibold leading-7 text-brown-900">
               Email
             </h3>
-            <dl className="mt-3 text-sm leading-6 text-gray-900">
+            <dl className="mt-3 text-sm leading-6">
               <div className="mt-1">
                 <dt className="sr-only">Email addresses</dt>
                 <dd>

@@ -10,7 +10,9 @@ export const AnimalCard = ({ animal }: { animal: Animal }) => {
       />
 
       <div className="p-4">
-        <h3 className="text-xl font-bold mb-1">{animal.ANIMALNAME}</h3>
+        <h3 className="text-xl font-bold mb-1 text-brown-900">
+          {animal.ANIMALNAME}
+        </h3>
         <div className="text-gray-600">
           <p className="text-sm">
             <b>Born:</b>{' '}
@@ -30,7 +32,7 @@ export const AnimalCard = ({ animal }: { animal: Animal }) => {
           </p>
           <p className="text-sm font-bold">{animal.BASECOLOURNAME}</p>
         </div>
-        <p className="mt-1 text-gray-900">{animal.ANIMALCOMMENTS}</p>
+        <p className="mt-1">{animal.ANIMALCOMMENTS}</p>
       </div>
     </>
   );

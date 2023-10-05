@@ -12,7 +12,7 @@ export function loader({ request }: { request: Request }) {
   const showSkeleton = url.searchParams.get('skeleton') === 'true';
   const animals = showSkeleton
     ? Promise.race<Animal[]>([])
-    : getAnimals(query, 'Kitten');
+    : getAnimals(query, 'Puppy');
   const selected = getSelectedAnimal();
 
   return defer({
@@ -22,13 +22,13 @@ export function loader({ request }: { request: Request }) {
   });
 }
 
-export const KittensPage = () => {
+export const PuppiesPage = () => {
   const { animals, selected, query } = useLoaderData() as {
     animals: Promise<Animal[]>;
     selected: Animal | null;
     query: string | null;
   };
-  const pageTitle = 'Kittens';
+  const pageTitle = 'Puppies';
 
   return (
     <div>

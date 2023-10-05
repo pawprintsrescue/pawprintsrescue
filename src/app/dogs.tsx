@@ -12,7 +12,7 @@ export function loader({ request }: { request: Request }) {
   const showSkeleton = url.searchParams.get('skeleton') === 'true';
   const animals = showSkeleton
     ? Promise.race<Animal[]>([])
-    : getAnimals(query, 'Kitten');
+    : getAnimals(query, 'Dog');
   const selected = getSelectedAnimal();
 
   return defer({
@@ -22,19 +22,19 @@ export function loader({ request }: { request: Request }) {
   });
 }
 
-export const KittensPage = () => {
+export const DogsPage = () => {
   const { animals, selected, query } = useLoaderData() as {
     animals: Promise<Animal[]>;
     selected: Animal | null;
     query: string | null;
   };
-  const pageTitle = 'Kittens';
+  const pageTitle = 'Dogs';
 
   return (
     <div>
       <h1 className="text-4xl font-bold mb-4 text-brown-900">{pageTitle}</h1>
 
-      <p className="text-sm font-bold">All Paw Prints kittens are:</p>
+      <p className="text-sm font-bold">All Paw Prints cats are:</p>
       <ol className="list-decimal pl-4 text-sm mb-2">
         <li>
           Tested for the feline leukemia (FeLV) and the feline immunodeficiency
@@ -43,11 +43,10 @@ export const KittensPage = () => {
         <li>Vaccinated appropriate to their age</li>
         <li>Sterilized</li>
         <li>Microchipped</li>
-        <li>Treated for internal and external parasites</li>
       </ol>
       <p className="text-sm mb-2 font-bold">
-        Unless otherwise noted, our adoption fee for kittens is $125 or $215 for
-        two kittens.
+        Unless otherwise noted, our adoption fee for adult cats is $100 or $175
+        for two adult cats.
       </p>
 
       <Suspense fallback={<AnimalListSkeleton />}>
