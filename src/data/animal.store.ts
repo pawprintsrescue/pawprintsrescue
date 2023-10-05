@@ -3,10 +3,7 @@ import sortBy from 'sort-by';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import * as api from './animal.api';
-import { Animal } from './animal.model';
-
-export type Species = 'Cat' | 'Dog';
-export type AnimalType = 'Kitten' | 'Cat' | 'Puppy' | 'Dog';
+import { Animal, AnimalType, Species } from './animal.model';
 
 export interface AnimalState {
   animals: Animal[];

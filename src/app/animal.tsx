@@ -1,13 +1,27 @@
 import { Animal } from '@/data';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
-import { Link, Params, useLoaderData } from 'react-router-dom';
+import { Link, Params, redirect, useLoaderData } from 'react-router-dom';
 import { AnimalImage } from '../components/animal.image';
 import { getAnimal } from '../data/animal.store';
+import { getAnimalLink } from '../data/animal.util';
 
 // eslint-disable-next-line react-refresh/only-export-components
-export async function loader({ params }: { params: Params<string> }) {
+export async function loader({
+  request,
+  params,
+}: {
+  request: Request;
+  params: Params<string>;
+}) {
   const id = params.id;
   const animal = await getAnimal(id ? parseInt(id) : 0);
+
+  // Redirect to the correct URL for the animal type if the animal is found
+  if (animal && request.url.includes('/animals/')) {
+    const url = getAnimalLink(animal);
+
+    return redirect(url);
+  }
 
   return { animal };
 }

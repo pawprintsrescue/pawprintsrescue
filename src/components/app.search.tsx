@@ -139,6 +139,10 @@ export const AppSearch = ({
                         hidden={!isSearching}
                       />
                     </div>
+                    <div className="bg-brown-50 px-4 py-2.5 text-xs font-semibold text-gray-900">
+                      Search for an animal&apos;s name, date of birth, age,
+                      gender, color, or description
+                    </div>
 
                     {filteredAnimals.length > 0 && (
                       <Combobox.Options
@@ -146,18 +150,28 @@ export const AppSearch = ({
                         className="max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800"
                       >
                         {filteredAnimals.map((animal) => (
-                          <Combobox.Option key={animal.ID} value={animal}>
+                          <Combobox.Option
+                            key={animal.ID}
+                            value={animal}
+                            className="py-0.5"
+                          >
                             <Link
                               to={`/animals/${animal.ID}`}
-                              className="flex items-center gap-2 px-4 py-2 hover:bg-brown-100 w-full"
+                              className="flex items-center gap-2 px-4 py-2 hover:bg-brown-100 focus:outline-none focus:bg-brown-50 w-full"
                               onClick={() => setOpen(false)}
                             >
                               <AnimalImage
                                 animal={animal}
                                 className="rounded-lg border border-brown-600 w-16 aspect-square grid place-items-center"
+                                showAdopted={false}
                               />
-                              <span className="text-brown-900 font-bold px-2">
+                              <span className="text-brown-900 font-bold px-2 flex items-center">
                                 {animal.ANIMALNAME}
+                                {!animal.ADOPTABLE ? (
+                                  <span className="ml-1 text-gray-900 text-xs font-semibold">
+                                    [Adopted]
+                                  </span>
+                                ) : null}
                               </span>
                               <span className="text-sm text-gray-600">
                                 <b>Age:</b>{' '}
@@ -165,7 +179,6 @@ export const AppSearch = ({
                                   '0 months',
                                   '',
                                 )}
-                                {', '}
                               </span>
                               <span className="text-sm text-gray-600 font-bold">
                                 {animal.SEX === 1
@@ -174,7 +187,6 @@ export const AppSearch = ({
                                     : 'Spayed '
                                   : ''}
                                 {animal.SEXNAME}
-                                {', '}
                               </span>
                               <span className="text-sm text-gray-600 font-bold">
                                 {animal.BASECOLOURNAME}

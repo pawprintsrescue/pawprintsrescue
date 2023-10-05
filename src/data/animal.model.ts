@@ -325,3 +325,7 @@ export type Animal = AsmAnimal & {
 export type AsmRecentlyAdopted = AsmAnimal & {
   ANIMALID: number;
 };
+
+export type Species = 'Cat' | 'Dog';
+
+export type AnimalType = 'Kitten' | 'Cat' | 'Puppy' | 'Dog';

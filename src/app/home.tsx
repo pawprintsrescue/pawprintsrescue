@@ -67,7 +67,7 @@ export const HomePage = () => {
         </div>
         <div className="rounded-lg w-full mx-auto col-span-12 lg:col-span-6 2xl:row-span-3 -order-1 lg:order-none">
           <iframe
-            className="border-0 w-full h-auto aspect-video rounded-lg"
+            className="border-0 w-full h-auto aspect-video rounded-lg bg-brown-100"
             src="https://www.youtube.com/embed/d14wfRw7250"
             title="Paw Prints Animal Rescue (Raleigh-Durham Area, NC)"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
