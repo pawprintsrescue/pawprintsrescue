@@ -8,11 +8,9 @@ export const getAnimalType = (animal: Animal): AnimalType => {
   const lastYear = today.getTime() - 365 * 24 * 60 * 60 * 1000;
   return dob.getTime() > lastYear
     ? species === 'Cat'
-      ? 'Kitten'
-      : 'Cat'
-    : species === 'Dog'
-    ? 'Puppy'
-    : 'Dog';
+      ? 'Cat'
+      : 'Dog' // Includes Puppy
+    : 'Kitten';
 };
 
 export const getAnimalLink = (animal: Animal): string => {
@@ -26,7 +24,7 @@ export const getAnimalLink = (animal: Animal): string => {
       segment = 'cats';
       break;
     case 'Puppy':
-      segment = 'puppies';
+      segment = 'dogs'; // puppies share the same page as dogs
       break;
     case 'Dog':
       segment = 'dogs';

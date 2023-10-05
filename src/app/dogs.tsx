@@ -28,25 +28,29 @@ export const DogsPage = () => {
     selected: Animal | null;
     query: string | null;
   };
-  const pageTitle = 'Dogs';
+  const pageTitle = 'Dogs & Puppies';
 
   return (
     <div>
       <h1 className="text-4xl font-bold mb-4 text-brown-900">{pageTitle}</h1>
 
-      <p className="text-sm font-bold">All Paw Prints cats are:</p>
+      <p className="text-sm font-bold">
+        All Paw Prints dogs and older puppies are:
+      </p>
       <ol className="list-decimal pl-4 text-sm mb-2">
         <li>
-          Tested for the feline leukemia (FeLV) and the feline immunodeficiency
-          (FIV) viruses (and negative unless otherwise noted)
+          Heartworm tested (and negative unless otherwise noted) and on
+          heartworm prevention
         </li>
         <li>Vaccinated appropriate to their age</li>
         <li>Sterilized</li>
         <li>Microchipped</li>
+        <li>Treated for internal and external parasites</li>
       </ol>
       <p className="text-sm mb-2 font-bold">
-        Unless otherwise noted, our adoption fee for adult cats is $100 or $175
-        for two adult cats.
+        Unless otherwise noted, our adoption fee for dogs and older puppies is
+        $200 or two for $350, and the adoption fee for senior dogs (7+ years) is
+        $100.
       </p>
 
       <Suspense fallback={<AnimalListSkeleton />}>

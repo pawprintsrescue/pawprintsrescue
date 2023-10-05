@@ -17,8 +17,7 @@ const navigation: NavigationItem[] = [
     children: [
       { name: 'Kittens', href: '/kittens' },
       { name: 'Cats', href: '/cats' },
-      { name: 'Puppies', href: '/puppies' },
-      { name: 'Dogs', href: '/dogs' },
+      { name: 'Dogs & Puppies', href: '/dogs' },
       { name: 'Feral Cats', href: '/feral' },
     ],
   },

@@ -15,7 +15,6 @@ import ErrorPage from './app/error';
 import { FeralPage } from './app/feral';
 import { HomePage } from './app/home';
 import { KittensPage, loader as kittensLoader } from './app/kittens';
-import { PuppiesPage, loader as puppiesLoader } from './app/puppies';
 import { SupportPage } from './app/support';
 import { WishListPage } from './app/wish-list';
 import './styles.css';
@@ -52,10 +51,7 @@ const router = createBrowserRouter(
         },
         {
           path: 'puppies',
-          children: [
-            { index: true, element: <PuppiesPage />, loader: puppiesLoader },
-            { path: ':id', element: <AnimalPage />, loader: animalLoader },
-          ],
+          children: [{ path: '*', element: <Navigate to="/dogs" /> }],
         },
         {
           path: 'dogs',

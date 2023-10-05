@@ -43,7 +43,8 @@ export const getAnimals = async (
       const today = new Date();
       // DOB is within the last year
       const lastYear = today.getTime() - 365 * 24 * 60 * 60 * 1000;
-      return type === 'Kitten' || type === 'Puppy'
+
+      return type === 'Kitten'
         ? dob.getTime() > lastYear
         : dob.getTime() <= lastYear;
     });

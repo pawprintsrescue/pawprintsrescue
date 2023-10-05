@@ -140,8 +140,8 @@ export const AppSearch = ({
                       />
                     </div>
                     <div className="bg-brown-50 px-4 py-2.5 text-xs font-semibold text-gray-900">
-                      Search for an animal&apos;s name, date of birth, age,
-                      gender, color, or description
+                      Search for an animal&apos;s name, age, color, or
+                      description
                     </div>
 
                     {filteredAnimals.length > 0 && (
