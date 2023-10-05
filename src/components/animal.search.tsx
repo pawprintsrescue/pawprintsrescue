@@ -61,7 +61,7 @@ export const AnimalSearch = ({
       className={clsx(
         'sticky top-20 z-20 py-4 transition-shadow',
         scrolled
-          ? 'bg-brown-100 border-y border-brown-900 shadow-md shadow-black/20 py-4 px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10'
+          ? 'border-y border-brown-900 bg-brown-100 py-4 shadow-md shadow-black/20 px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10'
           : '',
         scrolled
           ? 'ml-[calc(env(safe-area-inset-left)*-1-1rem)] mr-[calc(env(safe-area-inset-right)*-1-1rem)] md:ml-[calc(env(safe-area-inset-left)*-1-1.5rem)] md:mr-[calc(env(safe-area-inset-right)*-1-1.5rem)] lg:ml-[calc(env(safe-area-inset-left)*-1-2rem)] lg:mr-[calc(env(safe-area-inset-right)*-1-2rem)] 2xl:ml-[calc(env(safe-area-inset-left)*-1-2.5rem)] 2xl:mr-[calc(env(safe-area-inset-right)*-1-2.5rem)]'
@@ -71,7 +71,7 @@ export const AnimalSearch = ({
       <div className="flex items-center">
         <h1
           className={clsx(
-            'flex-1 text-4xl font-bold transition-opacity hidden sm:block text-brown-900',
+            'hidden flex-1 text-4xl font-bold text-brown-900 transition-opacity sm:block',
             scrolled ? 'opacity-100' : 'opacity-0',
           )}
         >
@@ -81,8 +81,8 @@ export const AnimalSearch = ({
         <label htmlFor="search-field" className="sr-only">
           Search
         </label>
-        <div className="relative rounded-md shadow-sm sm:max-w-sm w-full">
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 h-9">
+        <div className="relative w-full rounded-md shadow-sm sm:max-w-sm">
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex h-9 items-center pl-3">
             <MagnifyingGlassIcon
               className="h-5 w-5 text-gray-400"
               aria-hidden="true"
@@ -93,7 +93,7 @@ export const AnimalSearch = ({
             type="search"
             name="q"
             id="q"
-            className="block w-full rounded-md border-0 py-1.5 pl-10 pr-1.5 ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-brown-900 sm:text-sm sm:leading-6 focus-within:outline-none"
+            className="block w-full rounded-md border-0 py-1.5 pl-10 pr-1.5 ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus-within:outline-none focus:ring-2 focus:ring-inset focus:ring-brown-900 sm:text-sm sm:leading-6"
             placeholder="Search..."
             aria-label="Search for an animal"
             defaultValue={query ?? ''}

@@ -5,12 +5,12 @@ import youtubeIcon from '../assets/youtube-icon.png';
 export const HomePage = () => {
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-4 text-brown-900">
+      <h1 className="mb-4 text-4xl font-bold text-brown-900">
         Welcome to Paw Prints Animal Rescue
       </h1>
 
       <div className="grid grid-cols-12 gap-8">
-        <div className="space-y-2 col-span-12 lg:col-span-6">
+        <div className="col-span-12 space-y-2 lg:col-span-6">
           <h2 className="text-2xl font-bold text-brown-900">
             Come see our adorable, adoptable cats and kittens
           </h2>
@@ -41,40 +41,40 @@ export const HomePage = () => {
             cats. Since 2005, we have placed over 4,000 animals in loving homes
             and provided many more with temporary care through our programs.
           </p> */}
-          <div className="flex gap-4 justify-center pt-6">
+          <div className="flex justify-center gap-4 pt-6">
             <a
               href="https://www.facebook.com/pages/Paw-Prints-Animal-Rescue/201167013239191?ref=hl"
               aria-label="Follow us on Facebook"
-              className="hover:scale-110 transform transition-transform"
+              className="transform transition-transform hover:scale-110"
             >
               <img src={facebookIcon} alt="" />
             </a>
             <a
               href="https://twitter.com/pawprintsanimal"
               aria-label="Follow us on Twitter"
-              className="hover:scale-110 transform transition-transform"
+              className="transform transition-transform hover:scale-110"
             >
               <img src={twitterIcon} alt="" />
             </a>
             <a
               href="http://youtu.be/d14wfRw7250"
               aria-label="Follow us on YouTube"
-              className="hover:scale-110 transform transition-transform"
+              className="transform transition-transform hover:scale-110"
             >
               <img src={youtubeIcon} alt="" />
             </a>
           </div>
         </div>
-        <div className="rounded-lg w-full mx-auto col-span-12 lg:col-span-6 2xl:row-span-3 -order-1 lg:order-none">
+        <div className="-order-1 col-span-12 mx-auto w-full rounded-lg lg:order-none lg:col-span-6 2xl:row-span-3">
           <iframe
-            className="border-0 w-full h-auto aspect-video rounded-lg bg-brown-100"
+            className="aspect-video h-auto w-full rounded-lg border-0 bg-brown-100"
             src="https://www.youtube.com/embed/d14wfRw7250"
             title="Paw Prints Animal Rescue (Raleigh-Durham Area, NC)"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           ></iframe>
         </div>
-        <p className="text-sm col-span-12 lg:col-span-6">
+        <p className="col-span-12 text-sm lg:col-span-6">
           Paw Prints is an all-volunteer, nonprofit organization dedicated to
           reducing the population of homeless cats, kittens, dogs and puppies
           through foster care, medical treatment and adoption into forever
@@ -83,7 +83,7 @@ export const HomePage = () => {
           makes a lifetime commitment to every animal we rescue. We never want
           these animals to be homeless again.
         </p>
-        <div className="flex items-center justify-center h-32 lg:h-56 2xl:h-auto bg-white/25 py-2 px-4 rounded-2xl col-span-12 lg:col-span-6 lg:row-span-2 2xl:row-span-1">
+        <div className="col-span-12 flex h-32 items-center justify-center rounded-2xl bg-white/25 px-4 py-2 lg:col-span-6 lg:row-span-2 lg:h-56 2xl:row-span-1 2xl:h-auto">
           <input
             type="image"
             src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif"
@@ -97,7 +97,7 @@ export const HomePage = () => {
             height="1"
           />
         </div>
-        <p className="text-xs col-span-12 lg:col-span-6">
+        <p className="col-span-12 text-xs lg:col-span-6">
           Financial information about this organization and a copy of its
           license are available from the North Carolina State Solicitation
           Licensing Branch at{' '}

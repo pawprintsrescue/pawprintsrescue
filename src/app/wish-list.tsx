@@ -1,7 +1,7 @@
 export const WishListPage = () => {
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-4 text-brown-900">Wish list</h1>
+      <h1 className="mb-4 text-4xl font-bold text-brown-900">Wish list</h1>
 
       <p className="mb-2">
         <b>Here are some things we could use!</b> Call{' '}
@@ -19,7 +19,7 @@ export const WishListPage = () => {
         <br />
         We greatly appreciate anything you can do to help us help the animals.
       </p>
-      <ul className="font-bold list-disc pl-4">
+      <ul className="list-disc pl-4 font-bold">
         <li>Canned and dry cat food: Any brand</li>
         <li>Canned and dry dog food: Any brand</li>
         <li>

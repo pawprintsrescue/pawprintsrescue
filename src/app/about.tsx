@@ -1,7 +1,7 @@
 export const AboutPage = () => {
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-4 text-brown-900">About us</h1>
+      <h1 className="mb-4 text-4xl font-bold text-brown-900">About us</h1>
 
       <p className="mb-4">
         <b>Paw Prints Animal Rescue (PPAR)</b> is an all-volunteer nonprofit
@@ -11,7 +11,7 @@ export const AboutPage = () => {
         donations are our most important source of income as we receive no
         public funding.
       </p>
-      <h2 className="text-2xl font-bold mb-2 text-brown-900">
+      <h2 className="mb-2 text-2xl font-bold text-brown-900">
         Rescue and Adoption Program
       </h2>
       <p className="mb-4">
@@ -37,7 +37,7 @@ export const AboutPage = () => {
         can to stem the tide of homeless animals by requiring that all animals
         adopted from our program be sterilized.
       </p>
-      <h2 className="text-2xl font-bold mb-2 text-brown-900">
+      <h2 className="mb-2 text-2xl font-bold text-brown-900">
         Feral Cat Colony Management Program
       </h2>
       <p className="mb-4">

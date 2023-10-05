@@ -3,7 +3,7 @@ import feralcat from '../assets/feralcat.jpeg';
 export const FeralPage = () => {
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-4 text-brown-900">
+      <h1 className="mb-4 text-4xl font-bold text-brown-900">
         Feral Cat Management Program
       </h1>
 
@@ -11,7 +11,7 @@ export const FeralPage = () => {
         <img
           src={feralcat}
           alt=""
-          className="md:float-right md:ml-3 md:mb-3 rounded-lg order-1 mt-4 md:order-none md:mt-0"
+          className="order-1 mt-4 rounded-lg md:order-none md:float-right md:mb-3 md:ml-3 md:mt-0"
         />
         <p className="mb-4">
           When Paw Prints was formed in 2004, several of the organization&apos;s

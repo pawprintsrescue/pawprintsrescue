@@ -6,12 +6,12 @@ export const AnimalCard = ({ animal }: { animal: Animal }) => {
     <>
       <AnimalImage
         animal={animal}
-        className="[&>img]:rounded-t-lg rounded-t-lg border-b border-gray-600"
+        className="rounded-t-lg border-b border-gray-600 [&>img]:rounded-t-lg"
         thumbnail
       />
 
       <div className="p-4">
-        <h3 className="text-xl font-bold mb-1 text-brown-900">
+        <h3 className="mb-1 text-xl font-bold text-brown-900">
           {animal.ANIMALNAME}
         </h3>
         <div className="text-gray-600">

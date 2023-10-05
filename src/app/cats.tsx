@@ -32,10 +32,10 @@ export const CatsPage = () => {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-4 text-brown-900">{pageTitle}</h1>
+      <h1 className="mb-4 text-4xl font-bold text-brown-900">{pageTitle}</h1>
 
       <p className="text-sm font-bold">All Paw Prints cats are:</p>
-      <ol className="list-decimal pl-4 text-sm mb-2">
+      <ol className="mb-2 list-decimal pl-4 text-sm">
         <li>
           Tested for the feline leukemia (FeLV) and the feline immunodeficiency
           (FIV) viruses (and negative unless otherwise noted)
@@ -44,7 +44,7 @@ export const CatsPage = () => {
         <li>Sterilized</li>
         <li>Microchipped</li>
       </ol>
-      <p className="text-sm mb-2 font-bold">
+      <p className="mb-2 text-sm font-bold">
         Unless otherwise noted, our adoption fee for adult cats is $100 or $175
         for two adult cats.
       </p>

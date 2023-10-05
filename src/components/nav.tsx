@@ -59,7 +59,7 @@ export const Nav = ({
 
   return (
     <nav className={className}>
-      <ul className="flex gap-4 font-bold whitespace-nowrap">
+      <ul className="flex gap-4 whitespace-nowrap font-bold">
         {navigation.map((item) => (
           <li key={item.name}>
             {item.href ? (
@@ -67,9 +67,9 @@ export const Nav = ({
                 to={item.href}
                 className={({ isActive }) =>
                   clsx(
-                    'py-1 px-2 rounded-md block',
+                    'block rounded-md px-2 py-1',
                     isActive
-                      ? 'text-white bg-brown-900'
+                      ? 'bg-brown-900 text-white'
                       : 'hover:bg-brown-300 hover:text-white',
                   )
                 }
@@ -81,9 +81,9 @@ export const Nav = ({
               <Popover className="relative">
                 <Popover.Button
                   className={clsx(
-                    'py-1 px-2 rounded-md flex items-center',
+                    'flex items-center rounded-md px-2 py-1',
                     isActive(item)
-                      ? 'text-white bg-brown-900'
+                      ? 'bg-brown-900 text-white'
                       : 'hover:bg-brown-300 hover:text-white',
                   )}
                 >
@@ -101,15 +101,15 @@ export const Nav = ({
                   leaveTo="opacity-0 translate-y-1"
                 >
                   <Popover.Panel className="absolute left-1/2 z-30 mt-3 flex w-screen max-w-max -translate-x-1/2 px-4">
-                    <div className="max-w-lg flex-auto overflow-hidden rounded-xl text-sm leading-6 shadow-lg ring-1 ring-gray-900/5 bg-white">
-                      <div className="px-4 py-2 flex gap-8">
+                    <div className="max-w-lg flex-auto overflow-hidden rounded-xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+                      <div className="flex gap-8 px-4 py-2">
                         {item.children?.map((item) => (
                           <Popover.Button
                             as={NavLink}
                             key={item.name}
                             to={item.href!}
                             className={clsx(
-                              'py-0.5 px-2 block border-b-2',
+                              'block border-b-2 px-2 py-0.5',
                               isActive(item)
                                 ? 'border-brown-900'
                                 : 'border-transparent hover:border-brown-300',
@@ -130,7 +130,7 @@ export const Nav = ({
         <li>
           <button
             type="button"
-            className="h-8 w-8 rounded-md flex items-center justify-center"
+            className="flex h-8 w-8 items-center justify-center rounded-md"
             onClick={handleSearchClick}
           >
             <span className="sr-only">Search animals</span>

@@ -19,7 +19,7 @@ export const Header = ({
   return (
     <header
       className={clsx(
-        'flex gap-8 justify-between bg-white border-b border-brown-900 overflow-y-visible',
+        'flex justify-between gap-8 overflow-y-visible border-b border-brown-900 bg-white',
         className,
       )}
     >
@@ -31,7 +31,7 @@ export const Header = ({
         <img src={logo} alt="" className="h-auto max-h-full" />
       </Link>
 
-      <div className="flex lg:hidden h-7 mt-2.5">
+      <div className="mt-2.5 flex h-7 lg:hidden">
         <button
           type="button"
           className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
@@ -42,7 +42,7 @@ export const Header = ({
         </button>
       </div>
 
-      <Nav className="hidden lg:block mt-2.5" />
+      <Nav className="mt-2.5 hidden lg:block" />
 
       <Dialog
         as="div"
@@ -51,7 +51,7 @@ export const Header = ({
         onClose={setMobileMenuOpen}
       >
         <div className="fixed inset-0 z-40" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-40 w-full overflow-y-auto bg-white pt-safe-offset-4 pb-4 px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10 sm:max-w-sm sm:ring-1 sm:ring-brown-900/10">
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-40 w-full overflow-y-auto bg-white pb-4 pt-safe-offset-4 px-safe-offset-4 sm:max-w-sm sm:ring-1 sm:ring-brown-900/10 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10">
           <div className="flex items-start justify-between">
             <Link
               to="/"

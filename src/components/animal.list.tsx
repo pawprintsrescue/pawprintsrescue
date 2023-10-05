@@ -37,13 +37,13 @@ export const AnimalList = ({
         <>
           <AnimalSearch query={query} pageTitle={pageTitle} />
 
-          <ul className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-x-6">
+          <ul className="grid gap-x-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
             {animals.map((animal: Animal, index: number) => (
               <li id={animal.ID.toString()} key={animal.ID} className="py-4">
                 <Link
                   to={animal.ID.toString()}
                   ref={(el) => (cardRefs.current[index] = el)}
-                  className="block h-full transition-all sm:hover:scale-105 shadow hover:shadow-lg rounded-lg bg-white focus-within:outline-none ring-1 ring-gray-600 focus:ring focus:ring-brown-900"
+                  className="block h-full rounded-lg bg-white shadow ring-1 ring-gray-600 transition-all focus-within:outline-none hover:shadow-lg focus:ring focus:ring-brown-900 sm:hover:scale-105"
                 >
                   <AnimalCard animal={animal} />
                 </Link>
@@ -52,7 +52,7 @@ export const AnimalList = ({
           </ul>
         </>
       ) : (
-        <div className="mt-8 flex flex-col gap-4 items-center justify-center bg-white/25 p-4 rounded-2xl mb-8 h-32">
+        <div className="mb-8 mt-8 flex h-32 flex-col items-center justify-center gap-4 rounded-2xl bg-white/25 p-4">
           <p>Please check back for updated availablility</p>
         </div>
       )}

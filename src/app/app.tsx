@@ -43,18 +43,18 @@ function App() {
 
       <Header
         className={clsx(
-          'pt-safe-offset-4 pb-4 px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10 fixed top-0 inset-x-0 z-30 transition-all',
+          'fixed inset-x-0 top-0 z-30 pb-4 transition-all pt-safe-offset-4 px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10',
           scrolled ? 'shadow-md shadow-black/20' : '',
         )}
         scrolled={scrolled}
       />
 
       <main className="relative min-h-screen">
-        <div className="min-h-screen px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10 pt-safe-offset-44 pb-safe-offset-36">
+        <div className="min-h-screen pb-safe-offset-36 pt-safe-offset-44 px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10">
           <Outlet />
         </div>
 
-        <footer className="shadow-md shadow-black/20 bg-brown-100 border-t border-brown-900 absolute bottom-0 w-full pb-safe-offset-8 pt-8 px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10 text-sm text-center">
+        <footer className="absolute bottom-0 w-full border-t border-brown-900 bg-brown-100 pt-8 text-center text-sm shadow-md shadow-black/20 pb-safe-offset-8 px-safe-offset-4 md:px-safe-offset-6 lg:px-safe-offset-8 2xl:px-safe-offset-10">
           <p>
             Copyright &copy; {new Date().getFullYear()} Paw Prints Animal
             Rescue, Inc.
@@ -80,7 +80,7 @@ function App() {
       {scrolled ? (
         <button
           type="button"
-          className="fixed bottom-10 right-0 bg-brown-900 rounded-lg rounded-r-none p-2 transition-all text-white hover:scale-150 hover:-translate-x-1/4 mb-4 inline-flex"
+          className="fixed bottom-10 right-0 mb-4 inline-flex rounded-lg rounded-r-none bg-brown-900 p-2 text-white transition-all hover:-translate-x-1/4 hover:scale-150"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <ChevronUpIcon className="h-9 w-9" />

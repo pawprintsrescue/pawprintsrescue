@@ -11,8 +11,8 @@ export default function ErrorPage() {
     : '';
 
   return (
-    <div className="grid place-content-center gap-2 min-h-screen text-center">
-      <h1 className="text-4xl font-bold mb-2 text-brown-900">Oops!</h1>
+    <div className="grid min-h-screen place-content-center gap-2 text-center">
+      <h1 className="mb-2 text-4xl font-bold text-brown-900">Oops!</h1>
 
       <p>Sorry, an unexpected error has occurred.</p>
       <p>

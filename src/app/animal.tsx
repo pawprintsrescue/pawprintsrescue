@@ -31,12 +31,12 @@ export const AnimalPage = () => {
 
   return (
     <div>
-      <Link to=".." className="flex items-center mb-4">
-        <ArrowLeftIcon className="w-5 h-5 mr-1" />
+      <Link to=".." className="mb-4 flex items-center">
+        <ArrowLeftIcon className="mr-1 h-5 w-5" />
         Back to list
       </Link>
 
-      <h1 className="text-4xl font-bold mb-4 text-brown-900">
+      <h1 className="mb-4 text-4xl font-bold text-brown-900">
         Meet {animal.ANIMALNAME}
       </h1>
 
@@ -67,7 +67,7 @@ export const AnimalPage = () => {
         <div className="flex-1">
           <AnimalImage
             animal={animal}
-            className="[&>img]:rounded-lg rounded-lg border border-brown-600 max-w-lg"
+            className="max-w-lg rounded-lg border border-brown-600 [&>img]:rounded-lg"
           />
         </div>
       </div>

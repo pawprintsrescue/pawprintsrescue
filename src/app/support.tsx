@@ -4,9 +4,9 @@ import petSmartLogo from '../assets/petsmart.png';
 export const SupportPage = () => {
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-4 text-brown-900">Support us</h1>
+      <h1 className="mb-4 text-4xl font-bold text-brown-900">Support us</h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
         <div className="lg:col-span-8 2xl:col-span-6">
           <p className="mb-2">
             There are many ways you can help us help the animals. The
@@ -14,7 +14,7 @@ export const SupportPage = () => {
             us reduce the population of stray and owned cats and dogs in our
             community. Here are just a few ways that you can help:
           </p>
-          <ul className="list-disc pl-4 mb-8">
+          <ul className="mb-8 list-disc pl-4">
             <li>
               Become a foster home for pets in our Rescue and Adoption Program
             </li>
@@ -52,7 +52,7 @@ export const SupportPage = () => {
             </li>
           </ul>
 
-          <div className="flex flex-col gap-4 items-center justify-center bg-white/25 p-4 rounded-2xl mb-8">
+          <div className="mb-8 flex flex-col items-center justify-center gap-4 rounded-2xl bg-white/25 p-4">
             <p>We accept payments and donations through PayPal</p>
             <div>
               <input
@@ -97,11 +97,11 @@ export const SupportPage = () => {
         </div>
 
         <div className="lg:col-span-4 2xl:col-span-6">
-          <div className="rounded-2xl bg-white/25 p-8 mb-8">
+          <div className="mb-8 rounded-2xl bg-white/25 p-8">
             <h3 className="text-base font-semibold leading-7 text-brown-900">
               Our Supporters
             </h3>
-            <div className="flex items-center mt-3 lg:justify-between 2xl:justify-normal gap-4 lg:gap-0 2xl:gap-8">
+            <div className="mt-3 flex items-center gap-4 lg:justify-between lg:gap-0 2xl:justify-normal 2xl:gap-8">
               <img src={charitiesLogo} alt="PetSmart Charities" />
               <img src={petSmartLogo} alt="PetSmart" />
             </div>
@@ -159,13 +159,13 @@ export const SupportPage = () => {
             </address>
           </div>
 
-          <div className="flex flex-col gap-4 items-center justify-center bg-white/25 p-4 rounded-2xl">
+          <div className="flex flex-col items-center justify-center gap-4 rounded-2xl bg-white/25 p-4">
             <p>Option to pay adoption fee via PayPal</p>
             <form
               action="https://www.paypal.com/cgi-bin/webscr"
               method="post"
               target="_top"
-              className="flex flex-col gap-4 items-center justify-center max-w-xs w-full"
+              className="flex w-full max-w-xs flex-col items-center justify-center gap-4"
             >
               <input type="hidden" name="cmd" value="_s-xclick" />
               <input

@@ -32,10 +32,10 @@ export const KittensPage = () => {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-4 text-brown-900">{pageTitle}</h1>
+      <h1 className="mb-4 text-4xl font-bold text-brown-900">{pageTitle}</h1>
 
       <p className="text-sm font-bold">All Paw Prints kittens are:</p>
-      <ol className="list-decimal pl-4 text-sm mb-2">
+      <ol className="mb-2 list-decimal pl-4 text-sm">
         <li>
           Tested for the feline leukemia (FeLV) and the feline immunodeficiency
           (FIV) viruses (and negative unless otherwise noted)
@@ -45,7 +45,7 @@ export const KittensPage = () => {
         <li>Microchipped</li>
         <li>Treated for internal and external parasites</li>
       </ol>
-      <p className="text-sm mb-2 font-bold">
+      <p className="mb-2 text-sm font-bold">
         Unless otherwise noted, our adoption fee for kittens is $125 or $215 for
         two kittens.
       </p>

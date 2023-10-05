@@ -63,7 +63,7 @@ export const AppSearch = ({
     <>
       <div className="pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-gray-400"></div>
       <style>{`
-        #search-spinner {
+        .search-spinner {
           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%23000' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M20 4v5h-.582m0 0a8.001 8.001 0 00-15.356 2m15.356-2H15M4 20v-5h.581m0 0a8.003 8.003 0 0015.357-2M4.581 15H9' /%3E%3C/svg%3E");
           animation: spin 1s infinite linear;
         }
@@ -133,8 +133,7 @@ export const AppSearch = ({
                         onChange={debounceSearchChange}
                       />
                       <div
-                        id="search-spinner"
-                        className="pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-gray-400"
+                        className="search-spinner pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-gray-400"
                         aria-hidden
                         hidden={!isSearching}
                       />
@@ -157,18 +156,19 @@ export const AppSearch = ({
                           >
                             <Link
                               to={`/animals/${animal.ID}`}
-                              className="flex items-center gap-2 px-4 py-2 hover:bg-brown-100 focus:outline-none focus:bg-brown-50 w-full"
+                              className="flex w-full items-center gap-2 px-4 py-2 hover:bg-brown-100 focus:bg-brown-50 focus:outline-none"
                               onClick={() => setOpen(false)}
                             >
                               <AnimalImage
                                 animal={animal}
-                                className="rounded-lg border border-brown-600 w-16 aspect-square grid place-items-center"
+                                className="grid aspect-square w-16 place-items-center rounded-lg border border-brown-600"
                                 showAdopted={false}
+                                thumbnail
                               />
-                              <span className="text-brown-900 font-bold px-2 flex items-center">
+                              <span className="flex items-center px-2 font-bold text-brown-900">
                                 {animal.ANIMALNAME}
                                 {!animal.ADOPTABLE ? (
-                                  <span className="ml-1 text-gray-900 text-xs font-semibold">
+                                  <span className="ml-1 text-xs font-semibold text-gray-900">
                                     [Adopted]
                                   </span>
                                 ) : null}
@@ -180,7 +180,7 @@ export const AppSearch = ({
                                   '',
                                 )}
                               </span>
-                              <span className="text-sm text-gray-600 font-bold">
+                              <span className="text-sm font-bold text-gray-600">
                                 {animal.SEX === 1
                                   ? animal.NEUTERED
                                     ? 'Neutered '
@@ -188,7 +188,7 @@ export const AppSearch = ({
                                   : ''}
                                 {animal.SEXNAME}
                               </span>
-                              <span className="text-sm text-gray-600 font-bold">
+                              <span className="text-sm font-bold text-gray-600">
                                 {animal.BASECOLOURNAME}
                               </span>
                             </Link>

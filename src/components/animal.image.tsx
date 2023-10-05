@@ -25,8 +25,8 @@ export const AnimalImage = ({
         }}
       />
       {showAdopted && !animal.ADOPTABLE ? (
-        <div className="border-8 border-white absolute -mt-6 top-1/2 text-5xl w-full -rotate-12 shadow-md shadow-black/20">
-          <div className="uppercase font-bold text-center drop-shadow-md text-white">
+        <div className="absolute top-1/2 -mt-6 w-full -rotate-12 border-8 border-white text-5xl shadow-md shadow-black/20">
+          <div className="text-center font-bold uppercase text-white drop-shadow-md">
             Adopted
           </div>
         </div>

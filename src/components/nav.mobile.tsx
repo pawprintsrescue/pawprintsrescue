@@ -46,7 +46,7 @@ export const NavMobile = ({
 
   return (
     <nav className={className}>
-      <ul className="flex flex-col gap-4 font-bold whitespace-nowrap">
+      <ul className="flex flex-col gap-4 whitespace-nowrap font-bold">
         {navigation.map((item) => (
           <li key={item.name}>
             {item.href ? (
@@ -54,9 +54,9 @@ export const NavMobile = ({
                 to={item.href}
                 className={({ isActive }) =>
                   clsx(
-                    'py-1 px-2 rounded-md block',
+                    'block rounded-md px-2 py-1',
                     isActive
-                      ? 'text-white bg-brown-900'
+                      ? 'bg-brown-900 text-white'
                       : 'hover:bg-brown-300 hover:text-white',
                   )
                 }
@@ -68,9 +68,9 @@ export const NavMobile = ({
               <Popover className="relative">
                 <Popover.Button
                   className={clsx(
-                    'py-1 px-2 rounded-md flex items-center justify-between w-full',
+                    'flex w-full items-center justify-between rounded-md px-2 py-1',
                     isActive(item)
-                      ? 'text-white bg-brown-900'
+                      ? 'bg-brown-900 text-white'
                       : 'hover:bg-brown-300 hover:text-white',
                   )}
                 >
@@ -87,18 +87,18 @@ export const NavMobile = ({
                   leaveFrom="opacity-100 translate-y-0"
                   leaveTo="opacity-0 translate-y-1"
                 >
-                  <Popover.Panel className="absolute z-50 mt-3 flex max-w-sm w-full">
-                    <div className="max-w-lg flex-auto overflow-hidden rounded-xl text-sm leading-6 shadow-lg ring-1 ring-gray-900/5 bg-white">
-                      <div className="px-4 py-2 flex flex-col gap-4">
+                  <Popover.Panel className="absolute z-50 mt-3 flex w-full max-w-sm">
+                    <div className="max-w-lg flex-auto overflow-hidden rounded-xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+                      <div className="flex flex-col gap-4 px-4 py-2">
                         {item.children?.map((item) => (
                           <Popover.Button
                             as={NavLink}
                             key={item.name}
                             to={item.href!}
                             className={clsx(
-                              'py-0.5 px-2 block rounded-md',
+                              'block rounded-md px-2 py-0.5',
                               isActive(item)
-                                ? 'text-white bg-brown-900'
+                                ? 'bg-brown-900 text-white'
                                 : 'hover:bg-brown-300 hover:text-white',
                             )}
                             onClick={onItemClick}
