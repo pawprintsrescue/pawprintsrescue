@@ -75,7 +75,16 @@ export const getAnimal = async (id: number): Promise<Animal | null> => {
   let { animals } = useAnimalStore.getState();
   if (!animals?.length) animals = await getAnimals();
 
-  const animal = animals?.find((animal) => animal.ID === id);
+  const index = animals?.findIndex((animal) => animal.ID === id);
+  const animal = animals[index];
+
+  if (animal && !animal.image) {
+    const image = await api.getAnimalImage(id);
+    animal.image = image;
+    // Replace animal in animals array
+    animals[index] = animal;
+  }
+
   useAnimalStore.setState({ selected: animal });
 
   return animal ?? null;
