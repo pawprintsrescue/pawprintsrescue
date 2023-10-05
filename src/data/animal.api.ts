@@ -5,8 +5,8 @@ export type AnimalServiceMethod =
   | 'json_recent_adoptions'
   | 'json_shelter_animals';
 
-export async function getAnimalImage(id: number) {
-  const method = 'animal_image';
+export async function getAnimalImage(id: number, thumbnail = false) {
+  const method = thumbnail ? 'animal_thumbnail' : 'animal_image';
   const image = await fetch(
     `${import.meta.env.VITE_ASM_SERVICEURL}?method=${method}&account=${
       import.meta.env.VITE_ASM_ACCOUNT
@@ -41,8 +41,9 @@ export async function getAnimals(method = 'json_shelter_animals') {
           return {
             ...animal,
             ID: id,
-            image: await getAnimalImage(id),
-          };
+            thumbnail: await getAnimalImage(id, true),
+            // image: await getAnimalImage(id),
+          } satisfies Animal;
         }),
       ),
   );

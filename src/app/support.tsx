@@ -1,4 +1,4 @@
-import charitiesLogo from '../assets/charities_logo.png';
+import charitiesLogo from '../assets/charities-logo.png';
 import petSmartLogo from '../assets/petsmart.png';
 
 export const SupportPage = () => {

@@ -5,17 +5,19 @@ import missing from '../assets/missing.svg';
 export const AnimalImage = ({
   animal,
   className,
+  thumbnail = false,
   showAdopted = true,
 }: {
   animal: Animal;
   className?: string;
+  thumbnail?: boolean;
   showAdopted?: boolean;
 }) => {
   return (
     <div className={clsx('relative overflow-hidden bg-brown-100', className)}>
       <img
         className="w-full"
-        src={animal.image}
+        src={thumbnail ? animal.thumbnail : animal.image}
         alt={animal.ANIMALNAME}
         onError={(event) => {
           const target = event.target as HTMLImageElement;
