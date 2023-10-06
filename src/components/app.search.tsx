@@ -11,6 +11,7 @@ import {
   useNavigation,
   useSubmit,
 } from 'react-router-dom';
+import { getAnimalLink } from '../data/animal.util';
 import { AnimalImage } from './animal.image';
 
 export const AppSearch = ({
@@ -112,9 +113,7 @@ export const AppSearch = ({
             >
               <Dialog.Panel className="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
                 <Form id="app-search-form" role="search">
-                  <Combobox
-                  // onChange={(person: any) => (window.location = person.url)}
-                  >
+                  <Combobox>
                     <div className="relative">
                       <MagnifyingGlassIcon
                         className={clsx(
@@ -155,7 +154,7 @@ export const AppSearch = ({
                             className="py-0.5"
                           >
                             <Link
-                              to={`/animals/${animal.ID}`}
+                              to={getAnimalLink(animal)}
                               className="flex w-full items-center gap-2 px-4 py-2 hover:bg-brown-100 focus:bg-brown-50 focus:outline-none"
                               onClick={() => setOpen(false)}
                             >

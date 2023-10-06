@@ -319,6 +319,7 @@ export interface AsmAnimal {
 }
 
 export type Animal = AsmAnimal & {
+  type: AnimalType;
   thumbnail?: string;
   image?: string;
 };

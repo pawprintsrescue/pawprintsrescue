@@ -1,21 +1,20 @@
 import { Animal } from '@/data';
 import { AnimalImage } from './animal.image';
 
-export const AnimalCard = ({ animal }: { animal: Animal }) => {
+export const AnimalDetail = ({ animal }: { animal: Animal }) => {
   return (
     <>
-      <AnimalImage
-        animal={animal}
-        className="rounded-t-lg border-b border-gray-600 [&>img]:rounded-t-lg"
-        thumbnail
-      />
+      <h1 className="mb-4 text-4xl font-bold text-brown-900">
+        Meet {animal.ANIMALNAME}
+      </h1>
 
-      <div className="p-4">
-        <h3 className="mb-1 text-xl font-bold text-brown-900">
-          {animal.ANIMALNAME}
-        </h3>
+      <div className="flex flex-col md:block">
+        <AnimalImage
+          animal={animal}
+          className="order-1 mt-4 max-w-lg rounded-lg border border-brown-600 md:order-none md:float-right md:mb-3 md:ml-3 md:mt-0 [&>img]:rounded-lg"
+        />
 
-        <div className="mb-4 text-gray-600">
+        <div className="mb-4">
           <p className="text-sm">
             <b>Born:</b>{' '}
             {Intl.DateTimeFormat().format(new Date(animal.DATEOFBIRTH))}
@@ -37,6 +36,7 @@ export const AnimalCard = ({ animal }: { animal: Animal }) => {
 
         <p className="mt-1">{animal.ANIMALCOMMENTS}</p>
       </div>
+      <div className="md:clear-right"></div>
     </>
   );
 };

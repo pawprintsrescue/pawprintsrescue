@@ -1,4 +1,5 @@
 import { Animal, AsmRecentlyAdopted } from './animal.model';
+import { getAnimalType } from './animal.util';
 
 export type AnimalServiceMethod =
   | 'json_adoptable_animals'
@@ -41,8 +42,8 @@ export async function getAnimals(method = 'json_shelter_animals') {
           return {
             ...animal,
             ID: id,
+            type: getAnimalType(animal),
             thumbnail: await getAnimalImage(id, true),
-            // image: await getAnimalImage(id),
           } satisfies Animal;
         }),
       ),

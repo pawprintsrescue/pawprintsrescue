@@ -6,11 +6,12 @@ export const getAnimalType = (animal: Animal): AnimalType => {
   const today = new Date();
   // DOB is within the last year
   const lastYear = today.getTime() - 365 * 24 * 60 * 60 * 1000;
+
   return dob.getTime() > lastYear
-    ? species === 'Cat'
-      ? 'Cat'
-      : 'Dog' // Includes Puppy
-    : 'Kitten';
+    ? 'Kitten'
+    : species === 'Cat'
+    ? 'Cat'
+    : 'Dog'; // Includes Puppy
 };
 
 export const getAnimalLink = (animal: Animal): string => {
@@ -24,8 +25,6 @@ export const getAnimalLink = (animal: Animal): string => {
       segment = 'cats';
       break;
     case 'Puppy':
-      segment = 'dogs'; // puppies share the same page as dogs
-      break;
     case 'Dog':
       segment = 'dogs';
       break;

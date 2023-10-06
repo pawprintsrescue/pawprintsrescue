@@ -11,7 +11,7 @@ export function loader({ request }: { request: Request }) {
   const query = url.searchParams.get('q');
   const showSkeleton = url.searchParams.get('skeleton') === 'true';
   const animals = showSkeleton
-    ? Promise.race<Animal[]>([])
+    ? new Promise<Animal[]>(() => [])
     : getAnimals(query, 'Dog');
   const selected = getSelectedAnimal();
 

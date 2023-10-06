@@ -37,30 +37,15 @@ export const getAnimals = async (
     type = animalType;
     const species: Species =
       animalType === 'Cat' || animalType === 'Kitten' ? 'Cat' : 'Dog';
+    console.log({ animalType });
     animals = animals.filter((animal) => animal.SPECIESNAME === species);
-    animals = animals.filter((animal) => {
-      const dob = new Date(animal.DATEOFBIRTH);
-      const today = new Date();
-      // DOB is within the last year
-      const lastYear = today.getTime() - 365 * 24 * 60 * 60 * 1000;
-
-      return type === 'Kitten'
-        ? dob.getTime() > lastYear
-        : dob.getTime() <= lastYear;
-    });
+    animals = animals.filter((animal) => animal.type === animalType);
     useAnimalStore.setState({ type });
   }
 
   if (query) {
     animals = matchSorter(animals, query, {
-      keys: [
-        'ANIMALNAME',
-        'DATEOFBIRTH',
-        'ANIMALAGE',
-        'SEXNAME',
-        'BASECOLOURNAME',
-        'ANIMALCOMMENTS',
-      ],
+      keys: ['ANIMALNAME', 'ANIMALAGE', 'BASECOLOURNAME', 'ANIMALCOMMENTS'],
     });
     useAnimalStore.setState({ selected: undefined }); // Clear selected animal
   }

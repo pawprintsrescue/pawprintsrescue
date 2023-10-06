@@ -1,7 +1,5 @@
-export const AnimalImageSkeleton = () => {
-  return (
-    <div className="animate-pulse">
-      <div className="h-40 w-full rounded-t-lg border-b border-gray-600 bg-brown-200"></div>
-    </div>
-  );
+import clsx from 'clsx';
+
+export const AnimalImageSkeleton = ({ className }: { className?: string }) => {
+  return <div className={clsx('animate-pulse bg-gray-200', className)}></div>;
 };

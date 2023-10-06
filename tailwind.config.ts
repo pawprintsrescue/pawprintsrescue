@@ -1,6 +1,7 @@
 import formsPlugin from '@tailwindcss/forms';
 import type { Config } from 'tailwindcss';
 import safeAreaPlugin from 'tailwindcss-safe-area';
+import plugin from 'tailwindcss/plugin';
 
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
@@ -22,5 +23,22 @@ export default {
       },
     },
   },
-  plugins: [safeAreaPlugin, formsPlugin],
+  plugins: [
+    safeAreaPlugin,
+    formsPlugin,
+    plugin(({ addUtilities }) => {
+      const clearfix = {
+        '.clearfix': {
+          overflow: 'auto',
+        },
+        '.clearfix::after': {
+          content: '',
+          clear: 'both',
+          display: 'table',
+        },
+      };
+
+      addUtilities(clearfix);
+    }),
+  ],
 } satisfies Config;
