@@ -37,7 +37,6 @@ export const getAnimals = async (
     type = animalType;
     const species: Species =
       animalType === 'Cat' || animalType === 'Kitten' ? 'Cat' : 'Dog';
-    console.log({ animalType });
     animals = animals.filter((animal) => animal.SPECIESNAME === species);
     animals = animals.filter((animal) => animal.type === animalType);
     useAnimalStore.setState({ type });

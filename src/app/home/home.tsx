@@ -1,6 +1,6 @@
-import facebookIcon from '../assets/facebook-icon.png';
-import twitterIcon from '../assets/twitter-icon.png';
-import youtubeIcon from '../assets/youtube-icon.png';
+import facebookIcon from '../../assets/facebook-icon.png';
+import twitterIcon from '../../assets/twitter-icon.png';
+import youtubeIcon from '../../assets/youtube-icon.png';
 
 export const HomePage = () => {
   return (

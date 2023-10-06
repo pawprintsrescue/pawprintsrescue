@@ -1,4 +1,4 @@
-import feralcat from '../assets/feralcat.jpeg';
+import feralcat from '../../assets/feralcat.jpeg';
 
 export const FeralPage = () => {
   return (

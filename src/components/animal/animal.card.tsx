@@ -1,4 +1,4 @@
-import { Animal } from '@/data';
+import { Animal } from '../../data';
 import { AnimalImage } from './animal.image';
 
 export const AnimalCard = ({ animal }: { animal: Animal }) => {

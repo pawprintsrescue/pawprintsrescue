@@ -4,8 +4,7 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import { Nav } from './nav';
-import { NavMobile } from './nav.mobile';
+import { Nav, NavMobile } from './nav';
 
 export const Header = ({
   className,

@@ -1,4 +1,4 @@
-import { AnimalImageSkeleton } from '.';
+import { AnimalImageSkeleton } from './animal.image.skeleton';
 
 export const AnimalDetailSkeleton = () => {
   return (

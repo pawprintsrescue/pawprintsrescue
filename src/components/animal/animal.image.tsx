@@ -1,6 +1,6 @@
-import { Animal } from '@/data';
 import clsx from 'clsx';
-import missing from '../assets/missing.svg';
+import missing from '../../assets/missing.svg';
+import { Animal } from '../../data';
 
 export const AnimalImage = ({
   animal,

@@ -39,13 +39,8 @@ export const Nav = ({
   const { pathname } = useLocation();
   const deviceType = new MobileDetect(window.navigator.userAgent);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-  const isActive = (item: NavigationItem): boolean => {
-    if (item.href === 'kittens') console.log({ item, pathname });
-    return item.href
-      ? item.href === pathname
-      : item.children?.some(isActive) ?? false;
-  };
+  const isActive = (item: NavigationItem): boolean =>
+    item.href ? item.href === pathname : item.children?.some(isActive) ?? false;
 
   const handleSearchClick = () => {
     const mac = deviceType.os() === 'MacOS';

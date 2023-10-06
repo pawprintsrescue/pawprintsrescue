@@ -5,18 +5,19 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from 'react-router-dom';
-import { AboutPage } from './app/about';
-import { AnimalPage, loader as animalLoader } from './app/animal';
+import { AboutPage } from './app/about/about';
+import { AnimalPage, loader as animalLoader } from './app/animal/animal';
+import { AnimalsPage, loader as animalsLoader } from './app/animals/animals';
 import App, { loader as appLoader } from './app/app';
-import { CatsPage, loader as catsLoader } from './app/cats';
-import { ContactPage } from './app/contact';
-import { DogsPage, loader as dogsLoader } from './app/dogs';
+import { ContactPage } from './app/contact/contact';
 import ErrorPage from './app/error';
-import { FeralPage } from './app/feral';
-import { HomePage } from './app/home';
-import { KittensPage, loader as kittensLoader } from './app/kittens';
-import { SupportPage } from './app/support';
-import { WishListPage } from './app/wish-list';
+import { FeralPage } from './app/feral/feral';
+import { HomePage } from './app/home/home';
+import { SupportPage } from './app/support/support';
+import { WishListPage } from './app/wish-list/wish-list';
+import { CatsSummary } from './components/cats.summary';
+import { DogsSummary } from './components/dogs.summary';
+import { KittensSummary } from './components/kittens.summary';
 import './styles.css';
 
 const router = createBrowserRouter(
@@ -38,27 +39,42 @@ const router = createBrowserRouter(
         {
           path: 'kittens',
           children: [
-            { index: true, element: <KittensPage />, loader: kittensLoader },
+            {
+              index: true,
+              element: <AnimalsPage />,
+              loader: (args) => animalsLoader(args, 'Kitten'),
+              handle: { pageTitle: 'Kittens', summary: <KittensSummary /> },
+            },
             { path: ':id', element: <AnimalPage />, loader: animalLoader },
           ],
         },
         {
           path: 'cats',
           children: [
-            { index: true, element: <CatsPage />, loader: catsLoader },
+            {
+              index: true,
+              element: <AnimalsPage />,
+              loader: (args) => animalsLoader(args, 'Cat'),
+              handle: { pageTitle: 'Cats', summary: <CatsSummary /> },
+            },
+            { path: ':id', element: <AnimalPage />, loader: animalLoader },
+          ],
+        },
+        {
+          path: 'dogs',
+          children: [
+            {
+              index: true,
+              element: <AnimalsPage />,
+              loader: (args) => animalsLoader(args, 'Dog'),
+              handle: { pageTitle: 'Dogs', summary: <DogsSummary /> },
+            },
             { path: ':id', element: <AnimalPage />, loader: animalLoader },
           ],
         },
         {
           path: 'puppies',
           children: [{ path: '*', element: <Navigate to="/dogs" /> }],
-        },
-        {
-          path: 'dogs',
-          children: [
-            { index: true, element: <DogsPage />, loader: dogsLoader },
-            { path: ':id', element: <AnimalPage />, loader: animalLoader },
-          ],
         },
         { path: 'feral', element: <FeralPage /> },
         { path: 'about', element: <AboutPage /> },

@@ -1,4 +1,3 @@
-import { Animal } from '@/data';
 import { Combobox, Dialog, Transition } from '@headlessui/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
@@ -11,8 +10,8 @@ import {
   useNavigation,
   useSubmit,
 } from 'react-router-dom';
-import { getAnimalLink } from '../data/animal.util';
-import { AnimalImage } from './animal.image';
+import { Animal, getAnimalLink } from '../data';
+import { AnimalImage } from './animal';
 
 export const AppSearch = ({
   query,

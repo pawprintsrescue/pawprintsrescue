@@ -1,6 +1,6 @@
-import { Animal } from '@/data';
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Animal } from '../../data';
 import { AnimalCard } from './animal.card';
 import { AnimalSearch } from './animal.search';
 

@@ -1,5 +1,4 @@
 /* eslint-disable react-refresh/only-export-components */
-import { Animal } from '@/data';
 import { ChevronUpIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
@@ -7,7 +6,7 @@ import { Outlet, useLoaderData } from 'react-router-dom';
 import { AppSearch } from '../components/app.search';
 import { Header } from '../components/header';
 import ScrollToTop from '../components/scroll-to-top';
-import { getAnimals } from '../data/animal.store';
+import { Animal, getAnimals } from '../data';
 
 export async function loader({ request }: { request: Request }) {
   const url = new URL(request.url);

@@ -1,11 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
-import { Animal } from '@/data';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { Suspense } from 'react';
 import { Await, Link, Params, defer, useLoaderData } from 'react-router-dom';
-import { AnimalDetail } from '../components/animal.detail';
-import { AnimalDetailSkeleton } from '../components/animal.detail.skeleton';
-import { getAnimal } from '../data/animal.store';
+import { AnimalDetail, AnimalDetailSkeleton } from '../../components';
+import { Animal, getAnimal } from '../../data';
 
 export function loader({
   request,

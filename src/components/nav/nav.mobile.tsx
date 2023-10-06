@@ -36,13 +36,8 @@ export const NavMobile = ({
 }) => {
   const { pathname } = useLocation();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-  const isActive = (item: NavigationItem): boolean => {
-    if (item.href === 'kittens') console.log({ item, pathname });
-    return item.href
-      ? item.href === pathname
-      : item.children?.some(isActive) ?? false;
-  };
+  const isActive = (item: NavigationItem): boolean =>
+    item.href ? item.href === pathname : item.children?.some(isActive) ?? false;
 
   return (
     <nav className={className}>
