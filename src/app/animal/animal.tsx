@@ -22,7 +22,7 @@ export function loader({
   return defer({ animal });
 }
 
-export const AnimalPage = () => {
+export const Component = () => {
   const { animal } = useLoaderData() as { animal: Promise<Animal> };
 
   return (
@@ -40,3 +40,5 @@ export const AnimalPage = () => {
     </div>
   );
 };
+
+Component.displayName = 'AnimalPage';

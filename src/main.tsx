@@ -6,8 +6,6 @@ import {
   createBrowserRouter,
 } from 'react-router-dom';
 import { AboutPage } from './app/about/about';
-import { AnimalPage, loader as animalLoader } from './app/animal/animal';
-import { AnimalsPage, loader as animalsLoader } from './app/animals/animals';
 import App, { loader as appLoader } from './app/app';
 import { ContactPage } from './app/contact/contact';
 import ErrorPage from './app/error';
@@ -30,22 +28,22 @@ const router = createBrowserRouter(
       children: [
         { index: true, element: <HomePage /> },
         {
-          path: 'animals',
-          children: [
-            { index: true, element: <Navigate to="/" /> },
-            { path: ':id', element: <AnimalPage />, loader: animalLoader },
-          ],
-        },
-        {
           path: 'kittens',
           children: [
             {
               index: true,
-              element: <AnimalsPage />,
-              loader: (args) => animalsLoader(args, 'Kitten'),
-              handle: { pageTitle: 'Kittens', summary: <KittensSummary /> },
+              async lazy() {
+                const { AnimalsPage, loader } = await import(
+                  './app/animals/animals'
+                );
+                return {
+                  Component: AnimalsPage,
+                  loader: (args) => loader(args, 'Kitten'),
+                  handle: { pageTitle: 'Kittens', summary: <KittensSummary /> },
+                };
+              },
             },
-            { path: ':id', element: <AnimalPage />, loader: animalLoader },
+            { path: ':id', lazy: () => import('./app/animal/animal') },
           ],
         },
         {
@@ -53,11 +51,18 @@ const router = createBrowserRouter(
           children: [
             {
               index: true,
-              element: <AnimalsPage />,
-              loader: (args) => animalsLoader(args, 'Cat'),
-              handle: { pageTitle: 'Cats', summary: <CatsSummary /> },
+              async lazy() {
+                const { AnimalsPage, loader } = await import(
+                  './app/animals/animals'
+                );
+                return {
+                  Component: AnimalsPage,
+                  loader: (args) => loader(args, 'Cat'),
+                  handle: { pageTitle: 'Cats', summary: <CatsSummary /> },
+                };
+              },
             },
-            { path: ':id', element: <AnimalPage />, loader: animalLoader },
+            { path: ':id', lazy: () => import('./app/animal/animal') },
           ],
         },
         {
@@ -65,11 +70,18 @@ const router = createBrowserRouter(
           children: [
             {
               index: true,
-              element: <AnimalsPage />,
-              loader: (args) => animalsLoader(args, 'Dog'),
-              handle: { pageTitle: 'Dogs', summary: <DogsSummary /> },
+              async lazy() {
+                const { AnimalsPage, loader } = await import(
+                  './app/animals/animals'
+                );
+                return {
+                  Component: AnimalsPage,
+                  loader: (args) => loader(args, 'Dog'),
+                  handle: { pageTitle: 'Dogs', summary: <DogsSummary /> },
+                };
+              },
             },
-            { path: ':id', element: <AnimalPage />, loader: animalLoader },
+            { path: ':id', lazy: () => import('./app/animal/animal') },
           ],
         },
         {
@@ -81,6 +93,7 @@ const router = createBrowserRouter(
         { path: 'wish-list', element: <WishListPage /> },
         { path: 'support', element: <SupportPage /> },
         { path: 'contact', element: <ContactPage /> },
+        { path: 'animals', element: <Navigate to="/" /> },
       ],
     },
     { path: '*', element: <Navigate to="/" /> },
