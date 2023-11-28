@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
-export const useBreakpointObserver = (breakpoint: number) => {
-  const [isMatch, setIsMatch] = useState(false);
+export const useBreakpointObserver = (width: number) => {
+  const mediaQuery = window.matchMedia(`(min-width: ${width}px)`);
+  const [isMatch, setIsMatch] = useState(mediaQuery.matches);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia(`(min-width: ${breakpoint}px)`);
+    const mediaQuery = window.matchMedia(`(min-width: ${width}px)`);
 
     const handleMediaQueryChange = (e: MediaQueryListEvent) => {
       setIsMatch(e.matches);
@@ -15,7 +16,7 @@ export const useBreakpointObserver = (breakpoint: number) => {
     return () => {
       mediaQuery.removeEventListener('change', handleMediaQueryChange);
     };
-  }, [breakpoint]);
+  }, [width]);
 
   return isMatch;
 };

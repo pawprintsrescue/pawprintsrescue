@@ -36,9 +36,9 @@ export const AnimalsPage = () => {
     query: string | null;
   };
   const { pathname } = useLocation();
-  let matches = useMatches();
-  matches = matches.filter((match) => match.pathname === `${pathname}/`);
-  const handle = matches[0].handle as {
+  const matches = useMatches();
+  const match = matches.find((match) => match.pathname === `${pathname}/`);
+  const handle = match?.handle as {
     pageTitle: string;
     summary: ReactElement;
   };
