@@ -1,12 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
-
-import NxWelcome from './nx-welcome';
-
 export function App() {
   return (
-    <div>
-      <NxWelcome title="pawprintsrescue" />
+    <div className="p-8">
+      <h1 className="text-4xl font-bold text-primary-500 dark:text-primary-400">
+        Paw Prints Animal Rescue
+      </h1>
     </div>
   );
 }
