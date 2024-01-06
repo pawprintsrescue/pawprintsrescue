@@ -1,17 +1,24 @@
 import { StoreApi } from 'zustand';
+import { StoreState } from './store.state';
 
 // *****************************************************
 // Computed State Helpers
 // *****************************************************
 
-export type SetState<T> = (partial: T | Partial<T> | ((state: T) => T | Partial<T>), replace?: boolean) => void;
-export type ComputedState<T> = (state: Partial<T>) => Partial<T>;
+export type SetState<T> = (
+  partial: T | Partial<T> | ((state: T) => T | Partial<T>),
+  replace?: boolean,
+) => void;
+export type ComputedState<T extends StoreState, U = unknown> = (state: T) => U;
 
 /**
  * This is not middleware, but a utility function to create a store
  * with computed properties.
  */
-export function computeWith<T extends object>(buildComputed: ComputedState<T>, store: StoreApi<T>): SetState<T> {
+export function computeWith<T extends StoreState, U = unknown>(
+  buildComputed: ComputedState<T, U>,
+  store: StoreApi<T>,
+): SetState<T> {
   const originalSet = store.setState;
 
   // Set state updates & updated computed fields

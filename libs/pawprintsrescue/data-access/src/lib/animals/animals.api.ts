@@ -1,6 +1,7 @@
 import localforage from 'localforage';
 import { matchSorter } from 'match-sorter';
 import sortBy from 'sort-by';
+import animals from '../../data/animals';
 import { Animal, makeAnimal } from './animals.model';
 
 /**
@@ -9,7 +10,7 @@ import { Animal, makeAnimal } from './animals.model';
  */
 
 const allAnimals = async (): Promise<Animal[]> => {
-  return (await localforage.getItem<Animal[]>('animals')) || [];
+  return (await localforage.getItem<Animal[]>('animals')) || animals;
 };
 
 // Read
@@ -25,7 +26,7 @@ export async function getAnimals(query = ''): Promise<Animal[]> {
 }
 
 // Read
-export async function getAnimal(id: string) {
+export async function getAnimal(id: string): Promise<Animal | null> {
   await fakeNetwork(`animal:${id}`);
 
   const animals = await allAnimals();
@@ -35,10 +36,12 @@ export async function getAnimal(id: string) {
 }
 
 // Create
-export async function createAnimal(partial: Omit<Animal, 'id' | 'createdAt'>) {
+export async function createAnimal(
+  partial: Omit<Animal, 'id' | 'createdAt'>,
+): Promise<Animal> {
   await fakeNetwork();
 
-  const animals = await getAnimals();
+  const animals = await allAnimals();
   const newAnimal = makeAnimal(partial);
   await set([newAnimal, ...animals]);
 
@@ -46,7 +49,7 @@ export async function createAnimal(partial: Omit<Animal, 'id' | 'createdAt'>) {
 }
 
 // Update
-export async function updateAnimal(updated: Animal) {
+export async function updateAnimal(updated: Animal): Promise<Animal> {
   await fakeNetwork();
 
   const animals = await allAnimals();
@@ -60,14 +63,18 @@ export async function updateAnimal(updated: Animal) {
 }
 
 // Delete
-export async function deleteAnimal(id: string) {
+export async function deleteAnimal(id: string): Promise<boolean> {
+  await fakeNetwork();
+
   const animals = await allAnimals();
   const index = animals.findIndex((animal) => animal.id === id);
   if (index > -1) {
     animals.splice(index, 1);
     await set(animals);
+
     return true;
   }
+
   return false;
 }
 
@@ -82,8 +89,8 @@ async function fakeNetwork(key = '') {
   if (!key) fakeCache = {};
 
   if (!fakeCache[key]) {
-    fakeCache[key] = new Promise((res) => {
-      setTimeout(res, Math.random() * 800);
+    fakeCache[key] = new Promise((resolve) => {
+      setTimeout(resolve, Math.random() * 800);
     });
   }
 

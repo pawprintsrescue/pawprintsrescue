@@ -3,9 +3,10 @@ const requests$: Record<string, Promise<unknown> | undefined> = {};
 export type AsyncFunction<T> = () => Promise<T>;
 
 export const waitFor = async <T, U = T>(
-  id: string,
-  makeRequest: AsyncFunction<U>
+  makeRequest: AsyncFunction<U>,
+  id?: string,
 ): Promise<U> => {
+  if (!id) return makeRequest();
   if (requests$[id]) return requests$[id] as Promise<U>;
 
   requests$[id] = makeRequest();

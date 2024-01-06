@@ -11,12 +11,14 @@ import { Animal } from './animals.model';
 export interface AnimalsState extends StoreState {
   allAnimals: Animal[];
   searchQuery: string;
+  selectedAnimalId?: string;
 }
 
 /**
  * Read-only values computed from existing/updated state
  */
 export interface AnimalsComputedState {
+  selectedAnimal?: Animal;
   errors: string[];
 }
 
@@ -31,6 +33,7 @@ export interface AnimalsAPI {
   add: (partial: Omit<Animal, 'id' | 'createdAt'>) => Promise<Animal>; // Add
   edit: (animal: Animal, optimistic?: boolean) => Promise<Animal>; // Edit
   remove: (animal: Animal) => Promise<boolean>; // Remove
+  select: (animal: Animal) => void;
 }
 
-export type AnimalsViewModel = AnimalsState & AnimalsAPI & AnimalsComputedState;
+export type AnimalsViewModel = AnimalsState & AnimalsComputedState & AnimalsAPI;
