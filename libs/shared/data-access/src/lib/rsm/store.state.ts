@@ -1,3 +1,5 @@
+import { waitFor } from './store.utils';
+
 export type RestErrorMessage = { memberNames?: string[]; errorMessage: string };
 export type RestErrors = RestErrorMessage[];
 
@@ -13,18 +15,20 @@ type Errors = { errors?: RestErrors };
 export type StoreState = {
   requestStatus: StatusState;
 
-  // these are computed values based on request status
-  isReady: boolean; // state == 'success'
+  // These are computed values based on request status
+  showSkeleton?: boolean; // if not initialized or transitioning to loading
   isLoading?: boolean; // if busy
-  showSkeleton?: boolean; // if not initialized
+  isReady: boolean; // state == 'success'
+  forceSkeleton?: boolean; // if we want to force the skeleton to show
 };
 
 export function initStoreState(): StoreState {
   return {
     requestStatus: { value: 'initializing' },
-    isLoading: false,
     showSkeleton: true,
+    isLoading: false,
     isReady: false,
+    forceSkeleton: false,
   };
 }
 
@@ -33,10 +37,10 @@ export function initStoreState(): StoreState {
 // ****************************************************
 
 export declare type StatusState =
-  | SuccessState
-  | ErrorState
+  | InitializingState
   | PendingState
-  | InitializingState;
+  | SuccessState
+  | ErrorState;
 export interface SuccessState {
   value: 'success';
 }
@@ -62,32 +66,41 @@ export interface ErrorState {
  *  -  update with action data AND updated status
  */
 export function trackStatusWith<T extends StoreState>(
+  set: (state: Partial<T> | ((state: T) => Partial<T>)) => void,
   get: () => T,
-  set: (state: unknown) => T,
 ) {
-  return async <U = unknown>(action: () => Promise<Partial<T>>) => {
-    // Track isLoading state
-    set(updateRequestStatus('pending'));
+  return async (
+    action: () => Promise<Partial<T>>,
+    waitForId?: string,
+  ): Promise<T> =>
+    waitFor(async () => {
+      if (get().forceSkeleton) return get();
 
-    // Trigger async action
-    let withUpdatedRequestStatus = updateRequestStatus('success');
-    let updates: U;
-    try {
-      updates = (await action()) as U;
-    } catch (error) {
-      withUpdatedRequestStatus = updateRequestStatus('error');
-    }
+      // Track isLoading state
+      set(updateRequestStatus('pending'));
 
-    // Update with action data AND updated status
-    set((state: T) =>
-      withUpdatedRequestStatus({
-        ...state,
-        ...updates,
-      }),
-    );
+      // Introduce a delay for the skeleton to display a minimum amount of time
+      if (get().showSkeleton)
+        await new Promise((resolve) => setTimeout(resolve, 450));
 
-    return updates!;
-  };
+      try {
+        // Trigger async action
+        const updates = await action();
+        // Update status
+        const withUpdatedRequestStatus = updateRequestStatus<T>('success');
+        // Update with action data AND updated status
+        set((state: T) => withUpdatedRequestStatus({ ...state, ...updates }));
+      } catch (error) {
+        console.error(error);
+
+        const withUpdatedRequestStatus = updateRequestStatus<T>('error');
+        set((state: T) =>
+          withUpdatedRequestStatus({ ...state, errors: [`${error}`] }),
+        );
+      }
+
+      return get();
+    }, waitForId);
 }
 
 export const getRequestStatus = (state: StoreState) => {
@@ -107,10 +120,10 @@ export const getIsReady = (s: StoreState) =>
   getRequestStatus(s).value === 'success';
 
 export function updateRequestStatus<T extends StoreState>(
-  flag: 'pending' | 'success' | 'initializing' | 'error',
+  flag: 'initializing' | 'pending' | 'success' | 'error',
   updates?: Partial<T> & Errors,
 ) {
-  return (state: T): T => {
+  return (state: T): Partial<T> => {
     const wasInitializing = getIsInitializing(state);
     state = {
       ...state,
@@ -120,9 +133,9 @@ export function updateRequestStatus<T extends StoreState>(
     return {
       ...state,
       // Update raw values for view models
-      isLoading: getIsLoading(state),
       showSkeleton:
-        (wasInitializing && getIsLoading(state)) || getIsInitializing(state),
+        getIsInitializing(state) || (wasInitializing && getIsLoading(state)),
+      isLoading: getIsLoading(state),
       isReady: getIsReady(state),
     };
   };

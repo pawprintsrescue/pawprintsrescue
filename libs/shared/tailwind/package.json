@@ -1,0 +1,25 @@
+{
+  "name": "@pawprintsrescue/tailwind",
+  "version": "0.0.0-development",
+  "private": false,
+  "dependencies": {
+    "tailwindcss": "^3.3.3",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.3",
+    "tw-colors": "^3.3.1",
+    "tailwindcss-safe-area": "^0.4.1",
+    "@nx/vite": "^17.0.1",
+    "vite": "^4.5.0",
+    "vite-plugin-dts": "~2.3.0"
+  },
+  "module": "./index.mjs",
+  "typings": "./index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pawprintsrescue/pawprintsrescue",
+    "directory": "libs/shared/tailwind"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}

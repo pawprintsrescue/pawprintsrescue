@@ -19,7 +19,8 @@
         "libs/pawprintsrescue/data-access/src/index.ts"
       ],
       "@pawprintsrescue/ui": ["libs/pawprintsrescue/ui/src/index.ts"],
-      "@shared/data-access": ["libs/shared/data-access/src/index.ts"]
+      "@shared/data-access": ["libs/shared/data-access/src/index.ts"],
+      "@pawprintsrescue/tailwind": ["libs/shared/tailwind/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
