@@ -91,25 +91,23 @@ export function buildAnimalsStore(): StoreApi<AnimalsViewModel> {
     const api: AnimalsAPI = {
       loadAll: async (
         query?: string,
-        sortBy?: string,
+        sortBy = 'name',
         sortDirection?: 'asc' | 'desc',
       ): Promise<Animal[]> => {
         const { allAnimals } = await trackStatus(async () => {
-          const sortKeys = sortBy ? [sortBy || 'name'] : undefined;
+          const sortKeys = [sortBy];
           sortDirection =
             sortDirection ??
-            (sortBy
-              ? sortBy === get().sortBy && get().sortDirection === 'asc'
-                ? 'desc'
-                : 'asc'
-              : undefined);
+            (sortBy === get().sortBy && get().sortDirection === 'asc'
+              ? 'desc'
+              : 'asc');
           const allAnimals = await getAnimals(query, sortKeys, sortDirection);
 
           return {
             allAnimals,
             searchQuery: query || '',
-            sortBy: sortBy || 'name',
-            sortDirection: sortDirection || 'asc',
+            sortBy,
+            sortDirection,
           };
         }, ACTIONS.loadAll());
 
@@ -240,7 +238,8 @@ let _store: StoreApi<AnimalsViewModel>;
 export const store = () => {
   if (!_store) {
     _store = buildAnimalsStore();
-    syncUrlWithStore(_store);
+    // On app startup, determine if we have search params in the URL
+    syncStoreWithUrl(_store);
   }
 
   return _store;
@@ -254,39 +253,27 @@ export const api = (): AnimalsAPI => {
 // Bookmark URL Synchronizer
 // *******************************************************************
 
-export const updateStoreWithUrl = async (
-  _store: StoreApi<AnimalsViewModel>,
-) => {
-  const { searchParams } = new URL(window.location.href);
-  const {
-    q: searchQuery,
-    sort: sortBy,
-    direction: sortDirection,
-    id: selectedAnimalId,
-    forceSkeleton,
-  } = Object.fromEntries(searchParams) as {
-    q?: string;
-    sort?: string;
-    direction?: 'asc' | 'desc';
-    id?: string;
-    forceSkeleton?: string;
-  };
+export interface AnimalsUrlParams {
+  q?: string;
+  sort?: string;
+  direction?: 'asc' | 'desc';
+  id?: string;
+  forceSkeleton?: boolean;
+}
 
-  _store.setState({ selectedAnimalId });
-  _store.setState({ forceSkeleton: Boolean(forceSkeleton) });
+export const syncUrlWithStore = (state?: AnimalsViewModel) => {
+  const defaultState: AnimalsState = initState();
 
-  if (searchQuery || sortBy || sortDirection)
-    await _store.getState().loadAll(searchQuery, sortBy, sortDirection);
-};
-
-export const updateUrlWithState = (state: AnimalsViewModel) => {
+  state = state ?? store().getState();
   const { searchQuery, sortBy, sortDirection, selectedAnimalId } = state;
   const { pathname } = window.location;
   const searchParams = new URLSearchParams({
     ...(searchQuery ? { q: searchQuery } : {}),
-    ...(sortBy ? { sort: sortBy } : {}),
-    ...(sortDirection ? { direction: sortDirection } : {}),
-    // Only include the selectedAnimalId if it's not already in the URL as a path param
+    ...(sortBy && sortBy !== defaultState.sortBy ? { sort: sortBy } : {}),
+    ...(sortDirection && sortDirection !== defaultState.sortDirection
+      ? { direction: sortDirection }
+      : {}),
+    // Only include the selectedAnimalId if it is not already in the URL as a path param
     ...(selectedAnimalId && !pathname.includes(`/${selectedAnimalId}`)
       ? { id: selectedAnimalId }
       : {}),
@@ -299,10 +286,23 @@ export const updateUrlWithState = (state: AnimalsViewModel) => {
   }
 };
 
-const syncUrlWithStore = (_store: StoreApi<AnimalsViewModel>) => {
-  // On app startup, determine if we have search params in the URL
-  updateStoreWithUrl(_store);
+const syncStoreWithUrl = async (_store: StoreApi<AnimalsViewModel>) => {
+  const { search } = window.location;
+  const searchParams = new URLSearchParams(search);
+  const searchQuery = searchParams.get('q') ?? undefined;
+  const sortBy = searchParams.get('sort') ?? undefined;
+  const sortDirection = searchParams.get('direction') ?? undefined;
+  const selectedAnimalId = searchParams.get('id') ?? undefined;
+  const forceSkeleton = searchParams.get('forceSkeleton') ?? false;
 
-  // Whenever the state changes, update the URL
-  _store.subscribe(updateUrlWithState);
+  const { getState: get, setState: set } = _store;
+  set({ selectedAnimalId, forceSkeleton: Boolean(forceSkeleton) });
+
+  if (searchQuery || sortBy || sortDirection) {
+    get().loadAll(
+      searchQuery,
+      sortBy,
+      sortDirection as 'asc' | 'desc' | undefined,
+    );
+  }
 };

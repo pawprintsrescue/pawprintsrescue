@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { AnimalList } from './components/list';
 
 export function AnimalDashboard() {
+  const vm = useAnimals(true);
   const {
     allAnimals,
     searchQuery,
@@ -13,7 +14,7 @@ export function AnimalDashboard() {
     showSkeleton,
     isSearching,
     handleSearch,
-  } = useAnimals();
+  } = vm;
   const navigate = useNavigate();
 
   // Synchronize the input value with the URL query string.
