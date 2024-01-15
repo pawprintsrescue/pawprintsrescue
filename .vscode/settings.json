@@ -1,0 +1,5 @@
+{
+  "exportall.config.relExclusion": [
+    "/libs/pawprintsrescue/data-access/src/lib/animals/animals.api.ts"
+  ]
+}

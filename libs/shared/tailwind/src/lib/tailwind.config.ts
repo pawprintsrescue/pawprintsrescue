@@ -1,24 +1,28 @@
-const { createGlobPatternsForDependencies } = require('@nx/react/tailwind');
-const { join } = require('path');
-const { createThemes } = require('tw-colors');
-const colors = require('tailwindcss/colors');
-const tailwindPreset = require('@pawprintsrescue/tailwind');
+import aspectRatio from '@tailwindcss/aspect-ratio';
+import forms from '@tailwindcss/forms';
+import type { Config } from 'tailwindcss';
+import plugin from 'tailwindcss/plugin';
+import { createThemes } from 'tw-colors';
+import colors from './base/colors';
+import headings from './base/headings';
+import buttons from './components/buttons';
+import grid from './components/grid';
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  presets: [tailwindPreset],
-  content: [
-    join(__dirname, 'index.html'),
-    join(
-      __dirname,
-      '{src,pages,components,app}/**/*!(*.stories|*.spec).{ts,tsx,html}',
-    ),
-    ...createGlobPatternsForDependencies(__dirname),
-  ],
+export const tailwindPreset = {
   theme: {
+    colors: {
+      current: colors.current,
+      inherit: colors.inherit,
+      transparent: colors.transparent,
+      black: colors.black,
+      white: colors.white,
+    },
     extend: {},
   },
   plugins: [
+    forms,
+    aspectRatio,
+    require('tailwindcss-safe-area'),
     createThemes(
       ({ light, dark }) => ({
         light: light({
@@ -49,5 +53,13 @@ module.exports = {
         produceThemeVariant: (themeName) => `theme-${themeName}`,
       },
     ),
+    plugin(({ addBase, addComponents }) => {
+      addBase(headings);
+
+      addComponents(grid);
+      addComponents(buttons);
+    }),
   ],
-};
+} satisfies Omit<Config, 'content'>;
+
+export default tailwindPreset;
