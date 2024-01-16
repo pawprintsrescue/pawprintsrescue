@@ -95,18 +95,20 @@ export function buildAnimalsStore(): StoreApi<AnimalsViewModel> {
         sortDirection?: 'asc' | 'desc',
       ): Promise<Animal[]> => {
         const { allAnimals } = await trackStatus(async () => {
-          const sortKeys = [sortBy];
+          const sortKey = sortBy ?? get().sortBy;
           sortDirection =
             sortDirection ??
-            (sortBy === get().sortBy && get().sortDirection === 'asc'
-              ? 'desc'
-              : 'asc');
-          const allAnimals = await getAnimals(query, sortKeys, sortDirection);
+            (sortBy
+              ? sortBy === get().sortBy && get().sortDirection === 'asc'
+                ? 'desc'
+                : 'asc'
+              : get().sortDirection);
+          const allAnimals = await getAnimals(query, sortKey, sortDirection);
 
           return {
             allAnimals,
             searchQuery: query || '',
-            sortBy,
+            sortBy: sortKey,
             sortDirection,
           };
         }, ACTIONS.loadAll());
