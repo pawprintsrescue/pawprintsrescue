@@ -1,21 +1,25 @@
 import { ArrowPathIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { useAnimals } from '@pawprintsrescue/data-access';
 import clsx from 'clsx';
-import { useEffect, useRef } from 'react';
+import { debounce } from 'lodash';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnimalList } from './components/list';
 
 export function AnimalDashboard() {
   const vm = useAnimals(true);
-  const {
-    allAnimals,
-    searchQuery,
-    isLoading,
-    showSkeleton,
-    isSearching,
-    handleSearch,
-  } = vm;
+  const { allAnimals, searchQuery, isLoading, showSkeleton, loadAll } = vm;
   const navigate = useNavigate();
+
+  const [isSearching, setIsSearching] = useState(false);
+  const handleSearch = debounce(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      setIsSearching(true);
+      await loadAll(e.target.value);
+      setIsSearching(false);
+    },
+    300,
+  );
 
   // Synchronize the input value with the URL query string.
   // This is a simpler way of setting the value instead of using a controlled input.
@@ -25,6 +29,12 @@ export function AnimalDashboard() {
       qRef.current.value = searchQuery;
     }
   }, [searchQuery]);
+
+  useEffect(() => {
+    return () => {
+      handleSearch.cancel();
+    };
+  }, [handleSearch]);
 
   return (
     <>

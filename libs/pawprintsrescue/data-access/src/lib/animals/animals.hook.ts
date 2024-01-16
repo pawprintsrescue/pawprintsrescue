@@ -2,8 +2,7 @@
 // React HOOKS
 // *******************************************************************
 
-import { DebouncedFunc, debounce } from 'lodash';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useStoreWithEqualityFn } from 'zustand/traditional';
 
 import { Animal } from './animals.model';
@@ -12,14 +11,12 @@ import { store, syncUrlWithStore } from './animals.store';
 import { formatDate } from './animals.utils';
 
 interface AnimalsEventHandlers {
-  isSearching: boolean;
-  handleSearch: DebouncedFunc<(e: React.ChangeEvent<HTMLInputElement>) => void>;
   handleSort: (key: string) => void;
   handleAdd: () => boolean;
   handleEdit: (animal: Animal, e: React.MouseEvent<unknown>) => boolean;
   handleRemove: (animal: Animal, e: React.MouseEvent<unknown>) => boolean;
-  isSelected: (animal: Animal) => boolean;
   handleSelect: (animal: Animal, e: React.MouseEvent<unknown>) => void;
+  isSelected: (animal: Animal) => boolean;
 }
 
 /**
@@ -42,18 +39,6 @@ export function useAnimals(
   } = vm;
 
   // Event handlers
-  const [isSearching, setIsSearching] = useState(false);
-  const handleSearch = debounce(
-    async (e: React.ChangeEvent<HTMLInputElement>) => {
-      setIsSearching(true);
-
-      await loadAll(e.target.value);
-
-      setIsSearching(false);
-    },
-    500,
-  );
-
   const handleSort = (key: string) => {
     loadAll(searchQuery, key);
   };
@@ -96,7 +81,6 @@ export function useAnimals(
     return false;
   };
 
-  const isSelected = (animal: Animal) => animal.id === selectedAnimalId;
   const handleSelect = (animal: Animal, e: React.MouseEvent<unknown>) => {
     e.stopPropagation();
 
@@ -109,6 +93,7 @@ Name: ${animal.name}
 Created: ${formatDate(animal.createdAt)}
     `);
   };
+  const isSelected = (animal: Animal) => animal.id === selectedAnimalId;
 
   useEffect(() => {
     // Whenever the state changes, update the URL
@@ -121,14 +106,12 @@ Created: ${formatDate(animal.createdAt)}
 
   return {
     ...vm,
-    isSearching,
-    handleSearch,
     handleSort,
     handleAdd,
     handleEdit,
     handleRemove,
-    isSelected,
     handleSelect,
+    isSelected,
   };
 }
 

@@ -21,9 +21,10 @@ const allAnimals = async (): Promise<Animal[]> => {
 // Read
 export async function getAnimals(
   query = '',
-  sortKeys = ['name', 'createdAt'],
+  sortKey = 'name',
   sortDirection = 'asc',
 ): Promise<Animal[]> {
+  // await fakeNetwork(`getAnimals:${query}`);
   await fakeNetwork(`getAnimals:${query}`);
 
   let animals = await allAnimals();
@@ -32,11 +33,7 @@ export async function getAnimals(
   }
 
   return animals.sort(
-    sortBy(
-      ...sortKeys.map((key) =>
-        sortDirection === 'asc' ? `${key}` : `-${key}`,
-      ),
-    ),
+    sortBy(sortDirection === 'asc' ? `${sortKey}` : `-${sortKey}`),
   );
 }
 
