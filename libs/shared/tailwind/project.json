@@ -20,7 +20,7 @@
       "outputs": ["{options.reportsDirectory}"],
       "options": {
         "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/libs/shared/tailwind"
+        "reportsDirectory": "../../../coverage/libs/shared/tailwind"
       }
     },
     "lint": {
